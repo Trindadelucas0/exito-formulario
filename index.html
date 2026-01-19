@@ -451,71 +451,435 @@
             <input type="text" id="metragem" name="metragem">
 
             <label>Horário de Funcionamento:</label>
-            <div style="display: flex; gap: 10px; margin-top: 8px;">
-                <select name="dia_semana" style="flex: 1;">
-                    <option value="">Selecione o dia</option>
-                    <option>Segunda</option>
-                    <option>Terça</option>
-                    <option>Quarta</option>
-                    <option>Quinta</option>
-                    <option>Sexta</option>
-                    <option>Sábado</option>
-                    <option>Domingo</option>
-                </select>
-                <select name="horario_inicio" style="flex: 1;">
-                    <option value="">Horário início</option>
-                    <option>00:00</option>
-                    <option>01:00</option>
-                    <option>02:00</option>
-                    <option>03:00</option>
-                    <option>04:00</option>
-                    <option>05:00</option>
-                    <option>06:00</option>
-                    <option>07:00</option>
-                    <option>08:00</option>
-                    <option>09:00</option>
-                    <option>10:00</option>
-                    <option>11:00</option>
-                    <option>12:00</option>
-                    <option>13:00</option>
-                    <option>14:00</option>
-                    <option>15:00</option>
-                    <option>16:00</option>
-                    <option>17:00</option>
-                    <option>18:00</option>
-                    <option>19:00</option>
-                    <option>20:00</option>
-                    <option>21:00</option>
-                    <option>22:00</option>
-                    <option>23:00</option>
-                </select>
-                <select name="horario_fim" style="flex: 1;">
-                    <option value="">Horário fim</option>
-                    <option>00:00</option>
-                    <option>01:00</option>
-                    <option>02:00</option>
-                    <option>03:00</option>
-                    <option>04:00</option>
-                    <option>05:00</option>
-                    <option>06:00</option>
-                    <option>07:00</option>
-                    <option>08:00</option>
-                    <option>09:00</option>
-                    <option>10:00</option>
-                    <option>11:00</option>
-                    <option>12:00</option>
-                    <option>13:00</option>
-                    <option>14:00</option>
-                    <option>15:00</option>
-                    <option>16:00</option>
-                    <option>17:00</option>
-                    <option>18:00</option>
-                    <option>19:00</option>
-                    <option>20:00</option>
-                    <option>21:00</option>
-                    <option>22:00</option>
-                    <option>23:00</option>
-                </select>
+            <div style="margin-top: 8px;">
+                <label style="margin-bottom: 15px; font-size: 0.9em; color: var(--text-secondary); display: block;">Selecione os dias da semana e defina os horários:</label>
+                
+                <div class="horario-dia" style="display: flex; align-items: center; gap: 15px; margin-bottom: 12px; padding: 12px; border-radius: 8px; background: var(--primary-soft-light);">
+                    <div class="checkbox-item" style="min-width: 150px; margin: 0;">
+                        <input type="checkbox" id="dia_segunda" name="dias_semana" value="Segunda" class="dia-checkbox">
+                        <label for="dia_segunda" style="margin-top: 0;">Segunda-feira</label>
+                    </div>
+                    <select name="horario_inicio_segunda" class="horario-inicio" style="flex: 1;" disabled>
+                        <option value="">Horário início</option>
+                        <option>00:00</option>
+                        <option>01:00</option>
+                        <option>02:00</option>
+                        <option>03:00</option>
+                        <option>04:00</option>
+                        <option>05:00</option>
+                        <option>06:00</option>
+                        <option>07:00</option>
+                        <option>08:00</option>
+                        <option>09:00</option>
+                        <option>10:00</option>
+                        <option>11:00</option>
+                        <option>12:00</option>
+                        <option>13:00</option>
+                        <option>14:00</option>
+                        <option>15:00</option>
+                        <option>16:00</option>
+                        <option>17:00</option>
+                        <option>18:00</option>
+                        <option>19:00</option>
+                        <option>20:00</option>
+                        <option>21:00</option>
+                        <option>22:00</option>
+                        <option>23:00</option>
+                    </select>
+                    <select name="horario_fim_segunda" class="horario-fim" style="flex: 1;" disabled>
+                        <option value="">Horário fim</option>
+                        <option>00:00</option>
+                        <option>01:00</option>
+                        <option>02:00</option>
+                        <option>03:00</option>
+                        <option>04:00</option>
+                        <option>05:00</option>
+                        <option>06:00</option>
+                        <option>07:00</option>
+                        <option>08:00</option>
+                        <option>09:00</option>
+                        <option>10:00</option>
+                        <option>11:00</option>
+                        <option>12:00</option>
+                        <option>13:00</option>
+                        <option>14:00</option>
+                        <option>15:00</option>
+                        <option>16:00</option>
+                        <option>17:00</option>
+                        <option>18:00</option>
+                        <option>19:00</option>
+                        <option>20:00</option>
+                        <option>21:00</option>
+                        <option>22:00</option>
+                        <option>23:00</option>
+                    </select>
+                </div>
+
+                <div class="horario-dia" style="display: flex; align-items: center; gap: 15px; margin-bottom: 12px; padding: 12px; border-radius: 8px; background: var(--primary-soft-light);">
+                    <div class="checkbox-item" style="min-width: 150px; margin: 0;">
+                        <input type="checkbox" id="dia_terca" name="dias_semana" value="Terça" class="dia-checkbox">
+                        <label for="dia_terca" style="margin-top: 0;">Terça-feira</label>
+                    </div>
+                    <select name="horario_inicio_terca" class="horario-inicio" style="flex: 1;" disabled>
+                        <option value="">Horário início</option>
+                        <option>00:00</option>
+                        <option>01:00</option>
+                        <option>02:00</option>
+                        <option>03:00</option>
+                        <option>04:00</option>
+                        <option>05:00</option>
+                        <option>06:00</option>
+                        <option>07:00</option>
+                        <option>08:00</option>
+                        <option>09:00</option>
+                        <option>10:00</option>
+                        <option>11:00</option>
+                        <option>12:00</option>
+                        <option>13:00</option>
+                        <option>14:00</option>
+                        <option>15:00</option>
+                        <option>16:00</option>
+                        <option>17:00</option>
+                        <option>18:00</option>
+                        <option>19:00</option>
+                        <option>20:00</option>
+                        <option>21:00</option>
+                        <option>22:00</option>
+                        <option>23:00</option>
+                    </select>
+                    <select name="horario_fim_terca" class="horario-fim" style="flex: 1;" disabled>
+                        <option value="">Horário fim</option>
+                        <option>00:00</option>
+                        <option>01:00</option>
+                        <option>02:00</option>
+                        <option>03:00</option>
+                        <option>04:00</option>
+                        <option>05:00</option>
+                        <option>06:00</option>
+                        <option>07:00</option>
+                        <option>08:00</option>
+                        <option>09:00</option>
+                        <option>10:00</option>
+                        <option>11:00</option>
+                        <option>12:00</option>
+                        <option>13:00</option>
+                        <option>14:00</option>
+                        <option>15:00</option>
+                        <option>16:00</option>
+                        <option>17:00</option>
+                        <option>18:00</option>
+                        <option>19:00</option>
+                        <option>20:00</option>
+                        <option>21:00</option>
+                        <option>22:00</option>
+                        <option>23:00</option>
+                    </select>
+                </div>
+
+                <div class="horario-dia" style="display: flex; align-items: center; gap: 15px; margin-bottom: 12px; padding: 12px; border-radius: 8px; background: var(--primary-soft-light);">
+                    <div class="checkbox-item" style="min-width: 150px; margin: 0;">
+                        <input type="checkbox" id="dia_quarta" name="dias_semana" value="Quarta" class="dia-checkbox">
+                        <label for="dia_quarta" style="margin-top: 0;">Quarta-feira</label>
+                    </div>
+                    <select name="horario_inicio_quarta" class="horario-inicio" style="flex: 1;" disabled>
+                        <option value="">Horário início</option>
+                        <option>00:00</option>
+                        <option>01:00</option>
+                        <option>02:00</option>
+                        <option>03:00</option>
+                        <option>04:00</option>
+                        <option>05:00</option>
+                        <option>06:00</option>
+                        <option>07:00</option>
+                        <option>08:00</option>
+                        <option>09:00</option>
+                        <option>10:00</option>
+                        <option>11:00</option>
+                        <option>12:00</option>
+                        <option>13:00</option>
+                        <option>14:00</option>
+                        <option>15:00</option>
+                        <option>16:00</option>
+                        <option>17:00</option>
+                        <option>18:00</option>
+                        <option>19:00</option>
+                        <option>20:00</option>
+                        <option>21:00</option>
+                        <option>22:00</option>
+                        <option>23:00</option>
+                    </select>
+                    <select name="horario_fim_quarta" class="horario-fim" style="flex: 1;" disabled>
+                        <option value="">Horário fim</option>
+                        <option>00:00</option>
+                        <option>01:00</option>
+                        <option>02:00</option>
+                        <option>03:00</option>
+                        <option>04:00</option>
+                        <option>05:00</option>
+                        <option>06:00</option>
+                        <option>07:00</option>
+                        <option>08:00</option>
+                        <option>09:00</option>
+                        <option>10:00</option>
+                        <option>11:00</option>
+                        <option>12:00</option>
+                        <option>13:00</option>
+                        <option>14:00</option>
+                        <option>15:00</option>
+                        <option>16:00</option>
+                        <option>17:00</option>
+                        <option>18:00</option>
+                        <option>19:00</option>
+                        <option>20:00</option>
+                        <option>21:00</option>
+                        <option>22:00</option>
+                        <option>23:00</option>
+                    </select>
+                </div>
+
+                <div class="horario-dia" style="display: flex; align-items: center; gap: 15px; margin-bottom: 12px; padding: 12px; border-radius: 8px; background: var(--primary-soft-light);">
+                    <div class="checkbox-item" style="min-width: 150px; margin: 0;">
+                        <input type="checkbox" id="dia_quinta" name="dias_semana" value="Quinta" class="dia-checkbox">
+                        <label for="dia_quinta" style="margin-top: 0;">Quinta-feira</label>
+                    </div>
+                    <select name="horario_inicio_quinta" class="horario-inicio" style="flex: 1;" disabled>
+                        <option value="">Horário início</option>
+                        <option>00:00</option>
+                        <option>01:00</option>
+                        <option>02:00</option>
+                        <option>03:00</option>
+                        <option>04:00</option>
+                        <option>05:00</option>
+                        <option>06:00</option>
+                        <option>07:00</option>
+                        <option>08:00</option>
+                        <option>09:00</option>
+                        <option>10:00</option>
+                        <option>11:00</option>
+                        <option>12:00</option>
+                        <option>13:00</option>
+                        <option>14:00</option>
+                        <option>15:00</option>
+                        <option>16:00</option>
+                        <option>17:00</option>
+                        <option>18:00</option>
+                        <option>19:00</option>
+                        <option>20:00</option>
+                        <option>21:00</option>
+                        <option>22:00</option>
+                        <option>23:00</option>
+                    </select>
+                    <select name="horario_fim_quinta" class="horario-fim" style="flex: 1;" disabled>
+                        <option value="">Horário fim</option>
+                        <option>00:00</option>
+                        <option>01:00</option>
+                        <option>02:00</option>
+                        <option>03:00</option>
+                        <option>04:00</option>
+                        <option>05:00</option>
+                        <option>06:00</option>
+                        <option>07:00</option>
+                        <option>08:00</option>
+                        <option>09:00</option>
+                        <option>10:00</option>
+                        <option>11:00</option>
+                        <option>12:00</option>
+                        <option>13:00</option>
+                        <option>14:00</option>
+                        <option>15:00</option>
+                        <option>16:00</option>
+                        <option>17:00</option>
+                        <option>18:00</option>
+                        <option>19:00</option>
+                        <option>20:00</option>
+                        <option>21:00</option>
+                        <option>22:00</option>
+                        <option>23:00</option>
+                    </select>
+                </div>
+
+                <div class="horario-dia" style="display: flex; align-items: center; gap: 15px; margin-bottom: 12px; padding: 12px; border-radius: 8px; background: var(--primary-soft-light);">
+                    <div class="checkbox-item" style="min-width: 150px; margin: 0;">
+                        <input type="checkbox" id="dia_sexta" name="dias_semana" value="Sexta" class="dia-checkbox">
+                        <label for="dia_sexta" style="margin-top: 0;">Sexta-feira</label>
+                    </div>
+                    <select name="horario_inicio_sexta" class="horario-inicio" style="flex: 1;" disabled>
+                        <option value="">Horário início</option>
+                        <option>00:00</option>
+                        <option>01:00</option>
+                        <option>02:00</option>
+                        <option>03:00</option>
+                        <option>04:00</option>
+                        <option>05:00</option>
+                        <option>06:00</option>
+                        <option>07:00</option>
+                        <option>08:00</option>
+                        <option>09:00</option>
+                        <option>10:00</option>
+                        <option>11:00</option>
+                        <option>12:00</option>
+                        <option>13:00</option>
+                        <option>14:00</option>
+                        <option>15:00</option>
+                        <option>16:00</option>
+                        <option>17:00</option>
+                        <option>18:00</option>
+                        <option>19:00</option>
+                        <option>20:00</option>
+                        <option>21:00</option>
+                        <option>22:00</option>
+                        <option>23:00</option>
+                    </select>
+                    <select name="horario_fim_sexta" class="horario-fim" style="flex: 1;" disabled>
+                        <option value="">Horário fim</option>
+                        <option>00:00</option>
+                        <option>01:00</option>
+                        <option>02:00</option>
+                        <option>03:00</option>
+                        <option>04:00</option>
+                        <option>05:00</option>
+                        <option>06:00</option>
+                        <option>07:00</option>
+                        <option>08:00</option>
+                        <option>09:00</option>
+                        <option>10:00</option>
+                        <option>11:00</option>
+                        <option>12:00</option>
+                        <option>13:00</option>
+                        <option>14:00</option>
+                        <option>15:00</option>
+                        <option>16:00</option>
+                        <option>17:00</option>
+                        <option>18:00</option>
+                        <option>19:00</option>
+                        <option>20:00</option>
+                        <option>21:00</option>
+                        <option>22:00</option>
+                        <option>23:00</option>
+                    </select>
+                </div>
+
+                <div class="horario-dia" style="display: flex; align-items: center; gap: 15px; margin-bottom: 12px; padding: 12px; border-radius: 8px; background: var(--primary-soft-light);">
+                    <div class="checkbox-item" style="min-width: 150px; margin: 0;">
+                        <input type="checkbox" id="dia_sabado" name="dias_semana" value="Sábado" class="dia-checkbox">
+                        <label for="dia_sabado" style="margin-top: 0;">Sábado</label>
+                    </div>
+                    <select name="horario_inicio_sabado" class="horario-inicio" style="flex: 1;" disabled>
+                        <option value="">Horário início</option>
+                        <option>00:00</option>
+                        <option>01:00</option>
+                        <option>02:00</option>
+                        <option>03:00</option>
+                        <option>04:00</option>
+                        <option>05:00</option>
+                        <option>06:00</option>
+                        <option>07:00</option>
+                        <option>08:00</option>
+                        <option>09:00</option>
+                        <option>10:00</option>
+                        <option>11:00</option>
+                        <option>12:00</option>
+                        <option>13:00</option>
+                        <option>14:00</option>
+                        <option>15:00</option>
+                        <option>16:00</option>
+                        <option>17:00</option>
+                        <option>18:00</option>
+                        <option>19:00</option>
+                        <option>20:00</option>
+                        <option>21:00</option>
+                        <option>22:00</option>
+                        <option>23:00</option>
+                    </select>
+                    <select name="horario_fim_sabado" class="horario-fim" style="flex: 1;" disabled>
+                        <option value="">Horário fim</option>
+                        <option>00:00</option>
+                        <option>01:00</option>
+                        <option>02:00</option>
+                        <option>03:00</option>
+                        <option>04:00</option>
+                        <option>05:00</option>
+                        <option>06:00</option>
+                        <option>07:00</option>
+                        <option>08:00</option>
+                        <option>09:00</option>
+                        <option>10:00</option>
+                        <option>11:00</option>
+                        <option>12:00</option>
+                        <option>13:00</option>
+                        <option>14:00</option>
+                        <option>15:00</option>
+                        <option>16:00</option>
+                        <option>17:00</option>
+                        <option>18:00</option>
+                        <option>19:00</option>
+                        <option>20:00</option>
+                        <option>21:00</option>
+                        <option>22:00</option>
+                        <option>23:00</option>
+                    </select>
+                </div>
+
+                <div class="horario-dia" style="display: flex; align-items: center; gap: 15px; margin-bottom: 12px; padding: 12px; border-radius: 8px; background: var(--primary-soft-light);">
+                    <div class="checkbox-item" style="min-width: 150px; margin: 0;">
+                        <input type="checkbox" id="dia_domingo" name="dias_semana" value="Domingo" class="dia-checkbox">
+                        <label for="dia_domingo" style="margin-top: 0;">Domingo</label>
+                    </div>
+                    <select name="horario_inicio_domingo" class="horario-inicio" style="flex: 1;" disabled>
+                        <option value="">Horário início</option>
+                        <option>00:00</option>
+                        <option>01:00</option>
+                        <option>02:00</option>
+                        <option>03:00</option>
+                        <option>04:00</option>
+                        <option>05:00</option>
+                        <option>06:00</option>
+                        <option>07:00</option>
+                        <option>08:00</option>
+                        <option>09:00</option>
+                        <option>10:00</option>
+                        <option>11:00</option>
+                        <option>12:00</option>
+                        <option>13:00</option>
+                        <option>14:00</option>
+                        <option>15:00</option>
+                        <option>16:00</option>
+                        <option>17:00</option>
+                        <option>18:00</option>
+                        <option>19:00</option>
+                        <option>20:00</option>
+                        <option>21:00</option>
+                        <option>22:00</option>
+                        <option>23:00</option>
+                    </select>
+                    <select name="horario_fim_domingo" class="horario-fim" style="flex: 1;" disabled>
+                        <option value="">Horário fim</option>
+                        <option>00:00</option>
+                        <option>01:00</option>
+                        <option>02:00</option>
+                        <option>03:00</option>
+                        <option>04:00</option>
+                        <option>05:00</option>
+                        <option>06:00</option>
+                        <option>07:00</option>
+                        <option>08:00</option>
+                        <option>09:00</option>
+                        <option>10:00</option>
+                        <option>11:00</option>
+                        <option>12:00</option>
+                        <option>13:00</option>
+                        <option>14:00</option>
+                        <option>15:00</option>
+                        <option>16:00</option>
+                        <option>17:00</option>
+                        <option>18:00</option>
+                        <option>19:00</option>
+                        <option>20:00</option>
+                        <option>21:00</option>
+                        <option>22:00</option>
+                        <option>23:00</option>
+                    </select>
+                </div>
             </div>
 
             <label for="telefone_empresa">Telefone:</label>
@@ -593,6 +957,9 @@
 
                     <label for="socio_data_expedicao_${numero}">Data de Expedição:</label>
                     <input type="date" id="socio_data_expedicao_${numero}" name="socio_data_expedicao_${numero}" required>
+
+                    <label for="socio_orgao_expedidor_${numero}">Órgão Expedidor:</label>
+                    <input type="text" id="socio_orgao_expedidor_${numero}" name="socio_orgao_expedidor_${numero}" placeholder="Ex: SSP, IFP, DETRAN" required>
 
                     <label>Estado Civil:</label>
                     <select name="estado_civil_${numero}" required>
@@ -679,6 +1046,26 @@
                 img.className = 'logo-vision-ads';
                 form.prepend(img);
             }
+
+            // Habilita/desabilita campos de horário quando um dia é selecionado
+            const diaCheckboxes = document.querySelectorAll('.dia-checkbox');
+            diaCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const diaValue = this.value.toLowerCase();
+                    const horarioInicio = this.closest('.horario-dia').querySelector('.horario-inicio');
+                    const horarioFim = this.closest('.horario-dia').querySelector('.horario-fim');
+                    
+                    if (this.checked) {
+                        horarioInicio.disabled = false;
+                        horarioFim.disabled = false;
+                    } else {
+                        horarioInicio.disabled = true;
+                        horarioFim.disabled = true;
+                        horarioInicio.value = '';
+                        horarioFim.value = '';
+                    }
+                });
+            });
         });
 
         // Script do formulário
@@ -700,9 +1087,29 @@
             const iptu = formData.get('iptu');
             const cep = formData.get('cep');
             const metragem = formData.get('metragem');
-            const dia_semana = formData.get('dia_semana');
-            const horario_inicio = formData.get('horario_inicio');
-            const horario_fim = formData.get('horario_fim');
+            const dias_semana = formData.getAll('dias_semana');
+            
+            // Mapeia os dias para seus horários
+            const horariosPorDia = {};
+            const diasMap = {
+                'Segunda': 'segunda',
+                'Terça': 'terca',
+                'Quarta': 'quarta',
+                'Quinta': 'quinta',
+                'Sexta': 'sexta',
+                'Sábado': 'sabado',
+                'Domingo': 'domingo'
+            };
+            
+            dias_semana.forEach(dia => {
+                const diaKey = diasMap[dia];
+                if (diaKey) {
+                    horariosPorDia[dia] = {
+                        inicio: formData.get(`horario_inicio_${diaKey}`) || '',
+                        fim: formData.get(`horario_fim_${diaKey}`) || ''
+                    };
+                }
+            });
             const telefone_empresa = formData.get('telefone_empresa');
             const email_empresa = formData.get('email_empresa');
             const capital_social = formData.get('capital_social');
@@ -723,6 +1130,7 @@
                         cpf: formData.get(`socio_cpf_${i}`),
                         rg: formData.get(`socio_rg_${i}`),
                         data_expedicao: formData.get(`socio_data_expedicao_${i}`),
+                        orgao_expedidor: formData.get(`socio_orgao_expedidor_${i}`),
                         estado_civil: formData.get(`estado_civil_${i}`),
                         regime_casamento: formData.get(`regime_casamento_${i}`),
                         profissao: formData.get(`profissao_${i}`),
@@ -794,13 +1202,24 @@
                     answer: metragem
                 });
             }
-            if (dia_semana || horario_inicio || horario_fim) {
-                const horario = `${dia_semana || ''} ${horario_inicio || ''} às ${horario_fim || ''}`.trim();
-                if (horario) {
+            // Formatar horários de funcionamento por dia
+            if (Object.keys(horariosPorDia).length > 0) {
+                let horariosFormatados = [];
+                dias_semana.forEach(dia => {
+                    const horarios = horariosPorDia[dia];
+                    if (horarios && (horarios.inicio || horarios.fim)) {
+                        const horarioTexto = `${dia}: ${horarios.inicio || ''} às ${horarios.fim || ''}`.trim();
+                        horariosFormatados.push(horarioTexto);
+                    } else if (horarios) {
+                        horariosFormatados.push(dia);
+                    }
+                });
+                
+                if (horariosFormatados.length > 0) {
                     questionsAndAnswers.push({
                         number: questionNum++,
                         question: 'Horário de Funcionamento',
-                        answer: horario
+                        answer: horariosFormatados.join('\n')
                     });
                 }
             }
@@ -894,6 +1313,13 @@
                         number: questionNum++,
                         question: `Sócio ${socio.numero} - Data de Expedição`,
                         answer: socio.data_expedicao
+                    });
+                }
+                if (socio.orgao_expedidor) {
+                    questionsAndAnswers.push({
+                        number: questionNum++,
+                        question: `Sócio ${socio.numero} - Órgão Expedidor`,
+                        answer: socio.orgao_expedidor
                     });
                 }
                 if (socio.estado_civil) {

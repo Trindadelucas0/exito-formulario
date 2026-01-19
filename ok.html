@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obrigado!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Animações de fundo tecnológicas */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 178, 81, 0.08) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 0.8;
+            }
+        }
+
+        .grid-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(0, 178, 81, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 178, 81, 0.08) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            z-index: 0;
+            opacity: 0.6;
+        }
+
+        @keyframes gridMove {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(50px, 50px);
+            }
+        }
+
+        .particles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: float 15s infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100px) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        .container-obrigado {
+            background: #ffffff;
+            border: 2px solid rgba(0, 178, 81, 0.3);
+            padding: 60px 50px;
+            border-radius: 30px;
+            box-shadow:
+                0 20px 60px rgba(0, 178, 81, 0.15),
+                0 0 0 1px rgba(255, 255, 255, 0.8);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 30px;
+            position: relative;
+            animation: scaleIn 0.6s ease-out 0.3s both;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .success-icon::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 4px solid #00B251;
+            border-radius: 50%;
+            animation: ripple 2s infinite;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .checkmark {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #009642 0%, #00B251 50%, #00CC5A 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 10px 30px rgba(0, 178, 81, 0.3);
+        }
+
+        .checkmark i {
+            color: white;
+            font-size: 30px;
+            animation: checkmarkDraw 0.6s ease-out 0.5s both;
+        }
+
+        @keyframes checkmarkDraw {
+            from {
+                transform: scale(0) rotate(45deg);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        .container-obrigado h1 {
+            color: #009642;
+            font-size: 3em;
+            margin-bottom: 20px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            text-shadow: 0 2px 4px rgba(0, 178, 81, 0.1);
+        }
+
+        .container-obrigado p {
+            color: #2d4a2d;
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .container-botoes {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            margin-top: 40px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 40px;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 300px;
+            justify-content: center;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-voltar {
+            background: linear-gradient(135deg, #009642 0%, #00B251 50%, #00CC5A 100%);
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 178, 81, 0.3);
+        }
+
+        .btn-voltar:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 178, 81, 0.4);
+        }
+
+        .btn-instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: white;
+            box-shadow: 0 10px 30px rgba(188, 24, 136, 0.3);
+        }
+
+        .btn-instagram:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(188, 24, 136, 0.5);
+        }
+
+        .btn i {
+            font-size: 1.2em;
+        }
+
+        @media (min-width: 600px) {
+            .container-botoes {
+                flex-direction: row;
+                justify-content: center;
+            }
+
+            .btn {
+                width: auto;
+            }
+
+            .container-obrigado {
+                padding: 70px 60px;
+            }
+        }
+
+        /* Efeitos de brilho tecnológico */
+        .tech-glow {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(0, 178, 81, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(40px);
+            animation: moveGlow 10s ease-in-out infinite;
+        }
+
+        .tech-glow:nth-child(1) {
+            top: -100px;
+            left: -100px;
+        }
+
+        .tech-glow:nth-child(2) {
+            bottom: -100px;
+            right: -100px;
+            animation-delay: -5s;
+        }
+
+        @keyframes moveGlow {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(30px, 30px) scale(1.2);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-animation"></div>
+    <div class="grid-background"></div>
+    <div class="particles" id="particles"></div>
+
+    <div class="container-obrigado">
+        <div class="tech-glow"></div>
+        <div class="tech-glow"></div>
+
+        <div class="success-icon">
+            <div class="checkmark">
+                <i class="fas fa-check"></i>
+            </div>
+        </div>
+
+        <h1>Obrigado!</h1>
+        <p>O formulário foi enviado com sucesso.<br>
+            Nossa equipe vai entrar em contato em breve.</p>
+
+        <div class="container-botoes">
+            <a href="index.html" class="btn btn-voltar">
+                <i class="fas fa-arrow-left"></i>
+                <span>Voltar ao início</span>
+            </a>
+            <a href="https://www.instagram.com/exitoconbrasil" target="_blank" class="btn btn-instagram">
+                <i class="fab fa-instagram"></i>
+                <span>Seguir no Instagram</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Criar partículas animadas
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 20;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        createParticles();
+    </script>
+</body>
+
+</html>

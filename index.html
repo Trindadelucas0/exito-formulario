@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing Vision Ads & Projetos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00B251;
+            --primary-light: #00CC5A;
+            --primary-dark: #009642;
+            --primary-soft: rgba(0, 178, 81, 0.15);
+            --primary-soft-light: rgba(0, 178, 81, 0.08);
+            --card-bg: #ffffff;
+            --text: #1a3a1a;
+            --text-secondary: #2d4a2d;
+            --border: rgba(0, 178, 81, 0.3);
+            --bg-light: #f7fef7;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #ffffff;
+            background-attachment: fixed;
+            color: var(--text);
+            padding: 20px;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animações de fundo */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 178, 81, 0.08) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 0.8;
+            }
+        }
+
+        .grid-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(0, 178, 81, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 178, 81, 0.08) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            z-index: 0;
+            opacity: 0.6;
+        }
+
+        @keyframes gridMove {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(50px, 50px);
+            }
+        }
+
+        .form-briefing {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border: 4px solid var(--border);
+            padding: 50px 40px;
+            border-radius: 30px;
+            box-shadow:
+                0 20px 60px rgba(0, 178, 81, 0.15),
+                0 0 0 1px rgba(255, 255, 255, 0.8),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .titulo-principal {
+            text-align: center;
+            color: var(--primary-dark);
+            margin-bottom: 30px;
+            font-weight: 800;
+            font-size: 2.5em;
+            letter-spacing: -1px;
+        }
+
+        .intro-text {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        fieldset {
+            border: 3px solid var(--border);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #ffffff 0%, #f7fef7 100%);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        fieldset::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary) 0%, var(--primary-light) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        fieldset:hover {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+            box-shadow: 0 8px 24px rgba(0, 178, 81, 0.2);
+            transform: translateY(-2px);
+        }
+
+        fieldset:hover::before {
+            opacity: 1;
+        }
+
+        legend {
+            font-weight: 700;
+            padding: 0 15px;
+            color: var(--primary-dark);
+            font-size: 1.2em;
+            text-shadow: 0 2px 4px rgba(0, 178, 81, 0.1);
+            letter-spacing: 0.5px;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            font-weight: 500;
+            font-size: 0.95em;
+            color: var(--text);
+        }
+
+        label:first-child {
+            margin-top: 0;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 14px 16px;
+            margin-top: 8px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            background: #ffffff;
+            color: var(--text);
+            font-size: 0.95em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        select option {
+            padding: 12px;
+            font-weight: 500;
+        }
+
+        select option[value="Clean"] {
+            background-color: #f0f0f0 !important;
+            color: #333 !important;
+        }
+
+        select option[value="Moderno"] {
+            background-color: #e3f2fd !important;
+            color: #1976d2 !important;
+        }
+
+        select option[value="Sofisticado"] {
+            background-color: #f3e5f5 !important;
+            color: #7b1fa2 !important;
+        }
+
+        select option[value="Ainda não sei"] {
+            background-color: #fff3e0 !important;
+            color: #e65100 !important;
+        }
+
+        select option:hover {
+            opacity: 0.8;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: #ffffff;
+            box-shadow: 0 0 0 4px var(--primary-soft), 0 4px 12px rgba(0, 178, 81, 0.15);
+            transform: translateY(-1px);
+        }
+
+        input[type="text"]::placeholder,
+        input[type="email"]::placeholder,
+        textarea::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .radio-group,
+        .checkbox-group {
+            margin-top: 10px;
+        }
+
+        .radio-item,
+        .checkbox-item {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .radio-item:hover,
+        .checkbox-item:hover {
+            background: var(--primary-soft);
+            border-radius: 8px;
+            transform: translateX(4px);
+        }
+
+        .radio-item input,
+        .checkbox-item input {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--primary);
+        }
+
+        .radio-item label,
+        .checkbox-item label {
+            margin-top: 0;
+            cursor: pointer;
+            font-weight: 400;
+        }
+
+        .btn-enviar {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
+            color: white;
+            border: none;
+            padding: 20px;
+            width: 100%;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow:
+                0 10px 30px rgba(0, 178, 81, 0.3),
+                0 4px 8px rgba(0, 163, 24, 0.2);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-enviar::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn-enviar:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-enviar:hover {
+            transform: translateY(-4px);
+            box-shadow:
+                0 20px 50px rgba(0, 178, 81, 0.4),
+                0 8px 16px rgba(0, 163, 24, 0.3);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+        }
+
+        .btn-enviar:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-enviar span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-vision-ads {
+            display: block;
+            margin: 0 auto 30px;
+            max-width: 200px;
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow:
+                0 10px 30px rgba(0, 178, 81, 0.25),
+                0 0 0 1px rgba(0, 178, 81, 0.1);
+            animation: logoFloat 3s ease-in-out infinite;
+            border: 2px solid var(--primary-soft);
+            transition: all 0.3s ease;
+        }
+
+        .logo-vision-ads:hover {
+            transform: scale(1.05);
+            box-shadow:
+                0 15px 40px rgba(0, 178, 81, 0.35),
+                0 0 0 1px var(--primary);
+        }
+
+        @keyframes logoFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        small {
+            color: var(--text-secondary);
+            font-size: 0.85em;
+        }
+
+        /* Scrollbar personalizada */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-dark);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-animation"></div>
+    <div class="grid-background"></div>
+
+    <form id="form-briefing" class="form-briefing">
+        <h1 class="titulo-principal">Ficha de Constituição de Empresa</h1>
+
+        <p class="intro-text">Preencha todos os campos com as informações da empresa e dos sócios.</p>
+
+        <fieldset>
+            <legend>🏢 Dados da Empresa</legend>
+            <label for="razao_social">Razão Social:</label>
+            <input type="text" id="razao_social" name="razao_social" required>
+
+            <label for="nome_fantasia">Nome Fantasia:</label>
+            <input type="text" id="nome_fantasia" name="nome_fantasia" required>
+
+            <label for="endereco">Endereço:</label>
+            <input type="text" id="endereco" name="endereco" required>
+
+            <label for="bairro">Bairro:</label>
+            <input type="text" id="bairro" name="bairro" required>
+
+            <label for="iptu">IPTU Nº:</label>
+            <input type="text" id="iptu" name="iptu">
+
+            <label for="cep">CEP:</label>
+            <input type="text" id="cep" name="cep" required>
+
+            <label for="metragem">Metragem:</label>
+            <input type="text" id="metragem" name="metragem">
+
+            <label>Horário de Funcionamento:</label>
+            <div style="display: flex; gap: 10px; margin-top: 8px;">
+                <select name="dia_semana" style="flex: 1;">
+                    <option value="">Selecione o dia</option>
+                    <option>Segunda</option>
+                    <option>Terça</option>
+                    <option>Quarta</option>
+                    <option>Quinta</option>
+                    <option>Sexta</option>
+                    <option>Sábado</option>
+                    <option>Domingo</option>
+                </select>
+                <select name="horario_inicio" style="flex: 1;">
+                    <option value="">Horário início</option>
+                    <option>00:00</option>
+                    <option>01:00</option>
+                    <option>02:00</option>
+                    <option>03:00</option>
+                    <option>04:00</option>
+                    <option>05:00</option>
+                    <option>06:00</option>
+                    <option>07:00</option>
+                    <option>08:00</option>
+                    <option>09:00</option>
+                    <option>10:00</option>
+                    <option>11:00</option>
+                    <option>12:00</option>
+                    <option>13:00</option>
+                    <option>14:00</option>
+                    <option>15:00</option>
+                    <option>16:00</option>
+                    <option>17:00</option>
+                    <option>18:00</option>
+                    <option>19:00</option>
+                    <option>20:00</option>
+                    <option>21:00</option>
+                    <option>22:00</option>
+                    <option>23:00</option>
+                </select>
+                <select name="horario_fim" style="flex: 1;">
+                    <option value="">Horário fim</option>
+                    <option>00:00</option>
+                    <option>01:00</option>
+                    <option>02:00</option>
+                    <option>03:00</option>
+                    <option>04:00</option>
+                    <option>05:00</option>
+                    <option>06:00</option>
+                    <option>07:00</option>
+                    <option>08:00</option>
+                    <option>09:00</option>
+                    <option>10:00</option>
+                    <option>11:00</option>
+                    <option>12:00</option>
+                    <option>13:00</option>
+                    <option>14:00</option>
+                    <option>15:00</option>
+                    <option>16:00</option>
+                    <option>17:00</option>
+                    <option>18:00</option>
+                    <option>19:00</option>
+                    <option>20:00</option>
+                    <option>21:00</option>
+                    <option>22:00</option>
+                    <option>23:00</option>
+                </select>
+            </div>
+
+            <label for="telefone_empresa">Telefone:</label>
+            <input type="tel" id="telefone_empresa" name="telefone_empresa" required>
+
+            <label for="email_empresa">E-mail:</label>
+            <input type="email" id="email_empresa" name="email_empresa" required>
+
+            <label for="capital_social">Capital Social:</label>
+            <input type="text" id="capital_social" name="capital_social" required>
+
+            <label for="objeto_social">Objeto Social (Atividades Econômicas Exercidas):</label>
+            <textarea id="objeto_social" name="objeto_social" rows="3" required></textarea>
+
+            <label for="cnae_primario">CNAE Primário:</label>
+            <input type="text" id="cnae_primario" name="cnae_primario" required>
+
+            <label for="cnae_secundario">CNAE Secundário:</label>
+            <input type="text" id="cnae_secundario" name="cnae_secundario">
+
+            <label>Sociedade:</label>
+            <div class="radio-group">
+                <div class="radio-item"><input type="radio" name="sociedade" value="ltda"> LTDA (Sociedade Limitada)
+                </div>
+                <div class="radio-item"><input type="radio" name="sociedade" value="sa"> S.A. (Sociedade Anônima)</div>
+                <div class="radio-item"><input type="radio" name="sociedade" value="me"> ME (Microempresa)</div>
+                <div class="radio-item"><input type="radio" name="sociedade" value="epp"> EPP (Empresa de Pequeno Porte)
+                </div>
+                <div class="radio-item"><input type="radio" name="sociedade" value="mei"> MEI (Microempreendedor
+                    Individual)</div>
+                <div class="radio-item"><input type="radio" name="sociedade" value="simples"> Sociedade Simples</div>
+            </div>
+
+            <label>Quantidade de Sócios:</label>
+            <select name="quantidade_socios" id="quantidade_socios" required>
+                <option value="">Selecione...</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+
+            <label>Regime de Tributação:</label>
+            <div class="radio-group">
+                <div class="radio-item"><input type="radio" name="regime" value="lucro_presumido"> Lucro Presumido</div>
+                <div class="radio-item"><input type="radio" name="regime" value="simples_nacional"> Simples Nacional
+                </div>
+                <div class="radio-item"><input type="radio" name="regime" value="lucro_real"> Lucro Real</div>
+            </div>
+        </fieldset>
+
+        <div id="socios-container"></div>
+
+        <button type="submit" id="btn-enviar" class="btn-enviar">
+            <span>✨ Enviar Ficha</span>
+        </button>
+    </form>
+
+    <script>
+        // Função para criar formulário de sócio
+        function criarFormularioSocio(numero) {
+            return `
+                <fieldset id="socio-${numero}">
+                    <legend>👤 Dados do Sócio ${numero}</legend>
+                    
+                    <label for="socio_nome_${numero}">Nome:</label>
+                    <input type="text" id="socio_nome_${numero}" name="socio_nome_${numero}" required>
+
+                    <label for="socio_cpf_${numero}">CPF:</label>
+                    <input type="text" id="socio_cpf_${numero}" name="socio_cpf_${numero}" required>
+
+                    <label for="socio_rg_${numero}">RG:</label>
+                    <input type="text" id="socio_rg_${numero}" name="socio_rg_${numero}" required>
+
+                    <label for="socio_data_expedicao_${numero}">Data de Expedição:</label>
+                    <input type="date" id="socio_data_expedicao_${numero}" name="socio_data_expedicao_${numero}" required>
+
+                    <label>Estado Civil:</label>
+                    <select name="estado_civil_${numero}" required>
+                        <option value="">Selecione...</option>
+                        <option>Solteiro(a)</option>
+                        <option>Casado(a)</option>
+                        <option>Divorciado(a)</option>
+                        <option>Viúvo(a)</option>
+                    </select>
+
+                    <label>Regime de Casamento:</label>
+                    <select name="regime_casamento_${numero}">
+                        <option value="">Selecione...</option>
+                        <option>Comunhão Parcial de Bens</option>
+                        <option>Comunhão Universal de Bens</option>
+                        <option>Separação Total de Bens</option>
+                    </select>
+
+                    <label for="profissao_${numero}">Profissão:</label>
+                    <input type="text" id="profissao_${numero}" name="profissao_${numero}" required>
+
+                    <label for="naturalidade_${numero}">Naturalidade:</label>
+                    <input type="text" id="naturalidade_${numero}" name="naturalidade_${numero}" required>
+
+                    <label for="data_nascimento_${numero}">Data de Nascimento:</label>
+                    <input type="date" id="data_nascimento_${numero}" name="data_nascimento_${numero}" required>
+
+                    <label for="filiacao_${numero}">Filiação:</label>
+                    <input type="text" id="filiacao_${numero}" name="filiacao_${numero}" required>
+
+                    <label for="endereco_socio_${numero}">Endereço:</label>
+                    <input type="text" id="endereco_socio_${numero}" name="endereco_socio_${numero}" required>
+
+                    <label for="cep_socio_${numero}">CEP:</label>
+                    <input type="text" id="cep_socio_${numero}" name="cep_socio_${numero}" required>
+
+                    <label for="email_socio_${numero}">E-mail:</label>
+                    <input type="email" id="email_socio_${numero}" name="email_socio_${numero}" required>
+
+                    <label for="telefone_socio_${numero}">Telefone:</label>
+                    <input type="tel" id="telefone_socio_${numero}" name="telefone_socio_${numero}" required>
+
+                    <label>Sócio Administrador:</label>
+                    <div class="radio-group">
+                        <div class="radio-item"><input type="radio" name="administrador_${numero}" value="sim"> Sim</div>
+                        <div class="radio-item"><input type="radio" name="administrador_${numero}" value="nao"> Não</div>
+                    </div>
+
+                    <label for="participacao_${numero}">Valor da Participação no Capital Social (%):</label>
+                    <input type="text" id="participacao_${numero}" name="participacao_${numero}" required>
+
+                    <p style="margin-top: 20px; color: var(--text-secondary); font-size: 0.9em;"><strong>Obs:</strong> Enviar foto do RG ou CNH e CPF.</p>
+                </fieldset>
+            `;
+        }
+
+        // Função para atualizar formulários de sócios
+        function atualizarFormulariosSocios() {
+            const quantidadeSocios = document.getElementById('quantidade_socios').value;
+            const container = document.getElementById('socios-container');
+
+            container.innerHTML = '';
+
+            if (quantidadeSocios && quantidadeSocios > 0) {
+                for (let i = 1; i <= quantidadeSocios; i++) {
+                    container.insertAdjacentHTML('beforeend', criarFormularioSocio(i));
+                }
+            }
+        }
+
+        // Event listener para mudanças no select de quantidade de sócios
+        document.addEventListener('DOMContentLoaded', function () {
+            const selectQuantidade = document.getElementById('quantidade_socios');
+            if (selectQuantidade) {
+                selectQuantidade.addEventListener('change', atualizarFormulariosSocios);
+            }
+
+            // Adiciona logo
+            const form = document.getElementById('form-briefing');
+            if (form && !form.querySelector('.logo-vision-ads')) {
+                const img = document.createElement('img');
+                img.src = './img/vision 3.png';
+                img.alt = 'Logo Vision Ads';
+                img.className = 'logo-vision-ads';
+                form.prepend(img);
+            }
+        });
+
+        // Script do formulário
+        document.getElementById('form-briefing').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const btn = document.getElementById('btn-enviar');
+            const btnSpan = btn.querySelector('span');
+            btn.disabled = true;
+            btnSpan.innerText = "ENVIANDO DADOS...";
+
+            const formData = new FormData(this);
+
+            // Captura valores dos campos da Ficha de Constituição de Empresa
+            const razao_social = formData.get('razao_social');
+            const nome_fantasia = formData.get('nome_fantasia');
+            const endereco = formData.get('endereco');
+            const bairro = formData.get('bairro');
+            const iptu = formData.get('iptu');
+            const cep = formData.get('cep');
+            const metragem = formData.get('metragem');
+            const dia_semana = formData.get('dia_semana');
+            const horario_inicio = formData.get('horario_inicio');
+            const horario_fim = formData.get('horario_fim');
+            const telefone_empresa = formData.get('telefone_empresa');
+            const email_empresa = formData.get('email_empresa');
+            const capital_social = formData.get('capital_social');
+            const objeto_social = formData.get('objeto_social');
+            const cnae_primario = formData.get('cnae_primario');
+            const cnae_secundario = formData.get('cnae_secundario');
+            const sociedade = formData.get('sociedade');
+            const quantidade_socios = formData.get('quantidade_socios');
+            const regime = formData.get('regime');
+
+            // Captura dados dos sócios dinâmicos
+            const socios = [];
+            if (quantidade_socios) {
+                for (let i = 1; i <= quantidade_socios; i++) {
+                    const socio = {
+                        numero: i,
+                        nome: formData.get(`socio_nome_${i}`),
+                        cpf: formData.get(`socio_cpf_${i}`),
+                        rg: formData.get(`socio_rg_${i}`),
+                        data_expedicao: formData.get(`socio_data_expedicao_${i}`),
+                        estado_civil: formData.get(`estado_civil_${i}`),
+                        regime_casamento: formData.get(`regime_casamento_${i}`),
+                        profissao: formData.get(`profissao_${i}`),
+                        naturalidade: formData.get(`naturalidade_${i}`),
+                        data_nascimento: formData.get(`data_nascimento_${i}`),
+                        filiacao: formData.get(`filiacao_${i}`),
+                        endereco_socio: formData.get(`endereco_socio_${i}`),
+                        cep_socio: formData.get(`cep_socio_${i}`),
+                        email_socio: formData.get(`email_socio_${i}`),
+                        telefone_socio: formData.get(`telefone_socio_${i}`),
+                        administrador: formData.get(`administrador_${i}`),
+                        participacao: formData.get(`participacao_${i}`)
+                    };
+                    if (socio.nome) socios.push(socio);
+                }
+            }
+
+            // Cria array de perguntas e respostas
+            const questionsAndAnswers = [];
+            let questionNum = 1;
+
+            // Dados da Empresa
+            if (razao_social) {
+                questionsAndAnswers.push({
+                    number: questionNum++,
+                    question: 'Razão Social',
+                    answer: razao_social
+                });
+            }
+            if (nome_fantasia) {
+                questionsAndAnswers.push({
+                    number: questionNum++,
+                    question: 'Nome Fantasia',
+                    answer: nome_fantasia
+                });
+            }
+            if (endereco) {
+                questionsAndAnswers.push({
+                    number: questionNum++,
+                    question: 'Endereço',
+                    answer: endereco
+                });
+            }
+            if (bairro) {
+                questionsAndAnswers.push({
+                    number: questionNum++,
+                    question: 'Bairro',
+                    answer: bairro
+                });
+            }
+            if (iptu) {
+                questionsAndAnswers.push({
+                    number: questionNum++,
+                    question: 'IPTU Nº',
+                    answer: iptu
+                });
+            }
+            if (cep) {
+                questionsAndAnswers.push({
+                    number: questionNum++,
+                    question: 'CEP',
+                    answer: cep
+                });
+            }
+            if (metragem) {
+                questionsAndAnswers.push({
+                    number: questionNum++,
+                    question: 'Metragem',
+                    answer: metragem
+                });
+            }
+            if (dia_semana || horario_inicio || horario_fim) {
+                const horario = `${dia_semana || ''} ${horario_inicio || ''} às ${horario_fim || ''}`.trim();
+                if (horario) {
+                    questionsAndAnswers.push({
+                        number: questionNum++,
+                        question: 'Horário de Funcionamento',
+                        answer: horario
+                    });
+                }
+            }
+            if (telefone_empresa) {
+                questionsAndAnswers.push({
+                    number: questionNum++,
+                    question: 'Telefone',
+                    answer: telefone_empresa
+                });
+            }
+            if (email_empresa) {
+                questionsAndAnswers.push({
+                    number: questionNum++,
+                    question: 'E-mail',
+                    answer: email_empresa
+                });
+            }
+            if (capital_social) {
+                questionsAndAnswers.push({
+                    number: questionNum++,
+                    question: 'Capital Social',
+                    answer: capital_social
+                });
+            }
+            if (objeto_social) {
+                questionsAndAnswers.push({
+                    number: questionNum++,
+                    question: 'Objeto Social (Atividades Econômicas Exercidas)',
+                    answer: objeto_social
+                });
+            }
+            if (cnae_primario) {
+                questionsAndAnswers.push({
+                    number: questionNum++,
+                    question: 'CNAE Primário',
+                    answer: cnae_primario
+                });
+            }
+            if (cnae_secundario) {
+                questionsAndAnswers.push({
+                    number: questionNum++,
+                    question: 'CNAE Secundário',
+                    answer: cnae_secundario
+                });
+            }
+            if (sociedade) {
+                questionsAndAnswers.push({
+                    number: questionNum++,
+                    question: 'Sociedade',
+                    answer: sociedade
+                });
+            }
+            if (quantidade_socios) {
+                questionsAndAnswers.push({
+                    number: questionNum++,
+                    question: 'Quantidade de Sócios',
+                    answer: quantidade_socios
+                });
+            }
+            if (regime) {
+                questionsAndAnswers.push({
+                    number: questionNum++,
+                    question: 'Regime de Tributação',
+                    answer: regime
+                });
+            }
+
+            // Dados dos Sócios
+            socios.forEach(socio => {
+                questionsAndAnswers.push({
+                    number: questionNum++,
+                    question: `Sócio ${socio.numero} - Nome`,
+                    answer: socio.nome || ''
+                });
+                if (socio.cpf) {
+                    questionsAndAnswers.push({
+                        number: questionNum++,
+                        question: `Sócio ${socio.numero} - CPF`,
+                        answer: socio.cpf
+                    });
+                }
+                if (socio.rg) {
+                    questionsAndAnswers.push({
+                        number: questionNum++,
+                        question: `Sócio ${socio.numero} - RG`,
+                        answer: socio.rg
+                    });
+                }
+                if (socio.data_expedicao) {
+                    questionsAndAnswers.push({
+                        number: questionNum++,
+                        question: `Sócio ${socio.numero} - Data de Expedição`,
+                        answer: socio.data_expedicao
+                    });
+                }
+                if (socio.estado_civil) {
+                    questionsAndAnswers.push({
+                        number: questionNum++,
+                        question: `Sócio ${socio.numero} - Estado Civil`,
+                        answer: socio.estado_civil
+                    });
+                }
+                if (socio.regime_casamento) {
+                    questionsAndAnswers.push({
+                        number: questionNum++,
+                        question: `Sócio ${socio.numero} - Regime de Casamento`,
+                        answer: socio.regime_casamento
+                    });
+                }
+                if (socio.profissao) {
+                    questionsAndAnswers.push({
+                        number: questionNum++,
+                        question: `Sócio ${socio.numero} - Profissão`,
+                        answer: socio.profissao
+                    });
+                }
+                if (socio.naturalidade) {
+                    questionsAndAnswers.push({
+                        number: questionNum++,
+                        question: `Sócio ${socio.numero} - Naturalidade`,
+                        answer: socio.naturalidade
+                    });
+                }
+                if (socio.data_nascimento) {
+                    questionsAndAnswers.push({
+                        number: questionNum++,
+                        question: `Sócio ${socio.numero} - Data de Nascimento`,
+                        answer: socio.data_nascimento
+                    });
+                }
+                if (socio.filiacao) {
+                    questionsAndAnswers.push({
+                        number: questionNum++,
+                        question: `Sócio ${socio.numero} - Filiação`,
+                        answer: socio.filiacao
+                    });
+                }
+                if (socio.endereco_socio) {
+                    questionsAndAnswers.push({
+                        number: questionNum++,
+                        question: `Sócio ${socio.numero} - Endereço`,
+                        answer: socio.endereco_socio
+                    });
+                }
+                if (socio.cep_socio) {
+                    questionsAndAnswers.push({
+                        number: questionNum++,
+                        question: `Sócio ${socio.numero} - CEP`,
+                        answer: socio.cep_socio
+                    });
+                }
+                if (socio.email_socio) {
+                    questionsAndAnswers.push({
+                        number: questionNum++,
+                        question: `Sócio ${socio.numero} - E-mail`,
+                        answer: socio.email_socio
+                    });
+                }
+                if (socio.telefone_socio) {
+                    questionsAndAnswers.push({
+                        number: questionNum++,
+                        question: `Sócio ${socio.numero} - Telefone`,
+                        answer: socio.telefone_socio
+                    });
+                }
+                if (socio.administrador) {
+                    questionsAndAnswers.push({
+                        number: questionNum++,
+                        question: `Sócio ${socio.numero} - Sócio Administrador`,
+                        answer: socio.administrador
+                    });
+                }
+                if (socio.participacao) {
+                    questionsAndAnswers.push({
+                        number: questionNum++,
+                        question: `Sócio ${socio.numero} - Valor da Participação no Capital Social (%)`,
+                        answer: socio.participacao
+                    });
+                }
+            });
+
+            // Formatar texto de perguntas e respostas numeradas
+            let qaText = '';
+            qaText += '═══════════════════════════════════════════════════════════════════\n';
+            qaText += '              FICHA DE CONSTITUIÇÃO DE EMPRESA\n';
+            qaText += '              PERGUNTAS E RESPOSTAS NUMERADAS\n';
+            qaText += '═══════════════════════════════════════════════════════════════════\n\n';
+
+            questionsAndAnswers.forEach(item => {
+                const num = item.number.toString().padStart(3, '0');
+                qaText += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+                qaText += `PERGUNTA ${num}:\n`;
+                qaText += `${item.question}\n\n`;
+                qaText += `RESPOSTA ${num}:\n`;
+                qaText += `${item.answer}\n`;
+                qaText += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+            });
+
+            qaText += '═══════════════════════════════════════════════════════════════════\n';
+            qaText += `TOTAL DE PERGUNTAS RESPONDIDAS: ${questionsAndAnswers.length}\n`;
+            qaText += `DATA DE ENVIO: ${new Date().toLocaleString('pt-BR')}\n`;
+            qaText += '═══════════════════════════════════════════════════════════════════\n';
+
+            // Cria FormData para SheetMonkey (formato numerado)
+            const formDataToSend = new FormData();
+            formDataToSend.append('perguntas_respostas_numeradas', qaText);
+            formDataToSend.append('total_perguntas', questionsAndAnswers.length.toString());
+            formDataToSend.append('dataEnvio', new Date().toLocaleString('pt-BR'));
+
+            // URL do SheetMonkey
+            const scriptURL = 'https://api.sheetmonkey.io/form/ESzLegdYRAjQWCXXh1KVw';
+
+            fetch(scriptURL, {
+                method: 'POST',
+                body: formDataToSend
+            })
+                .then(() => {
+                    window.location.href = 'ok.html';
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    alert('❌ Ocorreu um erro ao enviar. Tente novamente.');
+                    btn.disabled = false;
+                    btnSpan.innerText = "✨ Enviar Ficha";
+                });
+        });
+
+    </script>
+</body>
+
+</html>

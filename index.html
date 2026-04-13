@@ -359,6 +359,43 @@
             z-index: 1;
         }
 
+        .nome-socio-receita-wrapper {
+            margin-top: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .nome-socio-receita-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nome-socio-receita-item input {
+            margin-top: 0;
+        }
+
+        .btn-add-socio-receita {
+            border: none;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            color: #ffffff;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            font-size: 1.6em;
+            line-height: 1;
+            cursor: pointer;
+            box-shadow: 0 8px 18px rgba(0, 178, 81, 0.28);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .btn-add-socio-receita:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 22px rgba(0, 178, 81, 0.35);
+        }
+
         .logo-vision-ads {
             display: block;
             margin: 0 auto 30px;
@@ -914,10 +951,16 @@
                 <div class="radio-item"><input type="radio" name="sociedade" value="simples"> Sociedade Simples</div>
             </div>
 
-            <label for="nome_socio_receita">Nome do sócio perante a Receita:</label>
-            <input type="text" id="nome_socio_receita" name="nome_socio_receita"
-                placeholder="Digite o nome completo" pattern=".{3,}\s+.{2,}.*"
-                title="Informe nome e sobrenome (nome completo)." required>
+            <label for="nome_socio_receita_1">Nome do sócio perante a Receita:</label>
+            <div id="nomes-socio-receita-wrapper" class="nome-socio-receita-wrapper">
+                <div class="nome-socio-receita-item">
+                    <input type="text" id="nome_socio_receita_1" name="nome_socio_receita[]"
+                        placeholder="Digite o nome completo" pattern=".{3,}\s+.{2,}.*"
+                        title="Informe nome e sobrenome (nome completo)." required>
+                    <button type="button" id="btn-add-socio-receita" class="btn-add-socio-receita"
+                        aria-label="Adicionar outro nome de sócio perante a Receita">+</button>
+                </div>
+            </div>
 
             <label>Quantidade de Sócios:</label>
             <select name="quantidade_socios" id="quantidade_socios" required>
@@ -1036,11 +1079,31 @@
             }
         }
 
+        function adicionarCampoNomeSocioReceita() {
+            const wrapper = document.getElementById('nomes-socio-receita-wrapper');
+            if (!wrapper) return;
+
+            const nextIndex = wrapper.querySelectorAll('input[name="nome_socio_receita[]"]').length + 1;
+            const item = document.createElement('div');
+            item.className = 'nome-socio-receita-item';
+            item.innerHTML = `
+                <input type="text" id="nome_socio_receita_${nextIndex}" name="nome_socio_receita[]"
+                    placeholder="Digite o nome completo" pattern=".{3,}\\s+.{2,}.*"
+                    title="Informe nome e sobrenome (nome completo).">
+            `;
+            wrapper.appendChild(item);
+        }
+
         // Event listener para mudanças no select de quantidade de sócios
         document.addEventListener('DOMContentLoaded', function () {
             const selectQuantidade = document.getElementById('quantidade_socios');
             if (selectQuantidade) {
                 selectQuantidade.addEventListener('change', atualizarFormulariosSocios);
+            }
+
+            const btnAddSocioReceita = document.getElementById('btn-add-socio-receita');
+            if (btnAddSocioReceita) {
+                btnAddSocioReceita.addEventListener('click', adicionarCampoNomeSocioReceita);
             }
 
             // Adiciona logo
@@ -1123,7 +1186,9 @@
             const cnae_primario = formData.get('cnae_primario');
             const cnae_secundario = formData.get('cnae_secundario');
             const sociedade = formData.get('sociedade');
-            const nome_socio_receita = formData.get('nome_socio_receita');
+            const nomes_socio_receita = formData.getAll('nome_socio_receita[]')
+                .map(nome => (nome || '').toString().trim())
+                .filter(nome => nome.length > 0);
             const quantidade_socios = formData.get('quantidade_socios');
             const regime = formData.get('regime');
 
@@ -1287,11 +1352,11 @@
                     answer: sociedadeMap[sociedade] || sociedade
                 });
             }
-            if (nome_socio_receita) {
+            if (nomes_socio_receita.length > 0) {
                 questionsAndAnswers.push({
                     number: questionNum++,
-                    question: 'Nome do sócio perante a Receita',
-                    answer: nome_socio_receita
+                    question: 'Nome(s) do sócio perante a Receita',
+                    answer: nomes_socio_receita.join(' | ')
                 });
             }
             if (quantidade_socios) {

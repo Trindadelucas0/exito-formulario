@@ -898,7 +898,8 @@
             <input type="text" id="cnae_primario" name="cnae_primario" required>
 
             <label for="cnae_secundario">CNAE Secundário:</label>
-            <input type="text" id="cnae_secundario" name="cnae_secundario">
+            <textarea id="cnae_secundario" name="cnae_secundario" rows="4"
+                placeholder="Digite um ou mais CNAEs secundários (um por linha)"></textarea>
 
             <label>Sociedade:</label>
             <div class="radio-group">
@@ -912,6 +913,11 @@
                     Individual)</div>
                 <div class="radio-item"><input type="radio" name="sociedade" value="simples"> Sociedade Simples</div>
             </div>
+
+            <label for="nome_socio_receita">Nome do sócio perante a Receita:</label>
+            <input type="text" id="nome_socio_receita" name="nome_socio_receita"
+                placeholder="Digite o nome completo" pattern=".{3,}\s+.{2,}.*"
+                title="Informe nome e sobrenome (nome completo)." required>
 
             <label>Quantidade de Sócios:</label>
             <select name="quantidade_socios" id="quantidade_socios" required>
@@ -1117,6 +1123,7 @@
             const cnae_primario = formData.get('cnae_primario');
             const cnae_secundario = formData.get('cnae_secundario');
             const sociedade = formData.get('sociedade');
+            const nome_socio_receita = formData.get('nome_socio_receita');
             const quantidade_socios = formData.get('quantidade_socios');
             const regime = formData.get('regime');
 
@@ -1266,10 +1273,25 @@
                 });
             }
             if (sociedade) {
+                const sociedadeMap = {
+                    ltda: 'LTDA (Sociedade Limitada)',
+                    sa: 'S.A. (Sociedade Anônima)',
+                    me: 'ME (Microempresa)',
+                    epp: 'EPP (Empresa de Pequeno Porte)',
+                    mei: 'MEI (Microempreendedor Individual)',
+                    simples: 'Sociedade Simples'
+                };
                 questionsAndAnswers.push({
                     number: questionNum++,
                     question: 'Sociedade',
-                    answer: sociedade
+                    answer: sociedadeMap[sociedade] || sociedade
+                });
+            }
+            if (nome_socio_receita) {
+                questionsAndAnswers.push({
+                    number: questionNum++,
+                    question: 'Nome do sócio perante a Receita',
+                    answer: nome_socio_receita
                 });
             }
             if (quantidade_socios) {
@@ -1280,10 +1302,15 @@
                 });
             }
             if (regime) {
+                const regimeMap = {
+                    lucro_presumido: 'Lucro Presumido',
+                    simples_nacional: 'Simples Nacional',
+                    lucro_real: 'Lucro Real'
+                };
                 questionsAndAnswers.push({
                     number: questionNum++,
                     question: 'Regime de Tributação',
-                    answer: regime
+                    answer: regimeMap[regime] || regime
                 });
             }
 
@@ -1393,10 +1420,11 @@
                     });
                 }
                 if (socio.administrador) {
+                    const administradorTexto = socio.administrador === 'sim' ? 'Sim' : 'Não';
                     questionsAndAnswers.push({
                         number: questionNum++,
                         question: `Sócio ${socio.numero} - Sócio Administrador`,
-                        answer: socio.administrador
+                        answer: administradorTexto
                     });
                 }
                 if (socio.participacao) {
@@ -1409,32 +1437,27 @@
             });
 
             // Formatar texto de perguntas e respostas numeradas
-            let qaText = '';
-            qaText += '═══════════════════════════════════════════════════════════════════\n';
-            qaText += '              FICHA DE CONSTITUIÇÃO DE EMPRESA\n';
-            qaText += '              PERGUNTAS E RESPOSTAS NUMERADAS\n';
-            qaText += '═══════════════════════════════════════════════════════════════════\n\n';
-
+            const dataEnvio = new Date().toLocaleString('pt-BR');
+            let qaText = 'FICHA DE CONSTITUICAO DE EMPRESA\n';
+            qaText += `DATA DE ENVIO == ${dataEnvio}\n`;
+            qaText += `TOTAL DE PERGUNTAS == ${questionsAndAnswers.length}\n`;
+            qaText += '----------------------------------------\n';
             questionsAndAnswers.forEach(item => {
                 const num = item.number.toString().padStart(3, '0');
-                qaText += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
-                qaText += `PERGUNTA ${num}:\n`;
-                qaText += `${item.question}\n\n`;
-                qaText += `RESPOSTA ${num}:\n`;
-                qaText += `${item.answer}\n`;
-                qaText += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+                const answerText = (item.answer || '')
+                    .toString()
+                    .replace(/\r?\n/g, ' | ')
+                    .replace(/\s+/g, ' ')
+                    .trim();
+                qaText += `${num}. ${item.question} == ${answerText}\n`;
             });
-
-            qaText += '═══════════════════════════════════════════════════════════════════\n';
-            qaText += `TOTAL DE PERGUNTAS RESPONDIDAS: ${questionsAndAnswers.length}\n`;
-            qaText += `DATA DE ENVIO: ${new Date().toLocaleString('pt-BR')}\n`;
-            qaText += '═══════════════════════════════════════════════════════════════════\n';
+            qaText += '----------------------------------------\n';
 
             // Cria FormData para SheetMonkey (formato numerado)
             const formDataToSend = new FormData();
             formDataToSend.append('perguntas_respostas_numeradas', qaText);
             formDataToSend.append('total_perguntas', questionsAndAnswers.length.toString());
-            formDataToSend.append('dataEnvio', new Date().toLocaleString('pt-BR'));
+            formDataToSend.append('dataEnvio', dataEnvio);
 
             // URL do SheetMonkey
             const scriptURL = 'https://api.sheetmonkey.io/form/ESzLegdYRAjQWCXXh1KVw';

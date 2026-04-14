@@ -249,6 +249,18 @@
             margin-top: 40px;
         }
 
+        .status-validacao {
+            margin-top: 18px;
+            padding: 14px 18px;
+            border-radius: 12px;
+            border: 2px solid rgba(0, 178, 81, 0.28);
+            background: linear-gradient(135deg, rgba(0, 178, 81, 0.1) 0%, rgba(0, 204, 90, 0.08) 100%);
+            color: #0b7a37;
+            font-size: 0.98em;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
         .btn {
             display: inline-flex;
             align-items: center;
@@ -395,6 +407,10 @@
         <h1>Seu formulário foi enviado com sucesso!</h1>
         <p>Agora vamos dar continuidade ao processo de abertura da sua empresa.
              <br>Em breve, falaremos com você!</p>
+        <div class="status-validacao">
+            Estamos validando o formulário e em instantes vamos abrir o WhatsApp automaticamente.
+            <br>Se não abrir, pode clicar aqui embaixo 👇
+        </div>
 
         <div class="container-botoes">
             <a href="https://www.instagram.com/exitoconbrasil" target="_blank" class="btn btn-instagram">
@@ -454,6 +470,10 @@ Favor dar prosseguimento ao atendimento e análise das informações.`;
         if (btnWhatsapp) {
             btnWhatsapp.href = linkWhatsapp;
         }
+
+        setTimeout(() => {
+            window.open(linkWhatsapp, '_blank');
+        }, 2000);
     </script>
 </body>
 

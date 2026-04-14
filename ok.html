@@ -311,6 +311,17 @@
             box-shadow: 0 15px 40px rgba(188, 24, 136, 0.5);
         }
 
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #0a7f38 0%, #25d366 50%, #4af08b 100%);
+            color: white;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.35);
+        }
+
+        .btn-whatsapp:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.5);
+        }
+
         .btn i {
             font-size: 1.2em;
         }
@@ -386,13 +397,14 @@
              <br>Em breve, falaremos com você!</p>
 
         <div class="container-botoes">
-            <a href="index.html" class="btn btn-voltar">
-                <i class="fas fa-arrow-left"></i>
-                <span>Voltar ao início</span>
-            </a>
             <a href="https://www.instagram.com/exitoconbrasil" target="_blank" class="btn btn-instagram">
                 <i class="fab fa-instagram"></i>
                 <span>Seguir no Instagram</span>
+            </a>
+            <a id="btn-whatsapp" href="https://wa.me/556137100080" target="_blank" rel="noopener noreferrer"
+                class="btn btn-whatsapp">
+                <i class="fab fa-whatsapp"></i>
+                <span>Dar continuidade no WhatsApp</span>
             </a>
         </div>
     </div>
@@ -414,6 +426,34 @@
         }
 
         createParticles();
+
+        const numeroWhatsapp = '556137100080';
+        const dadosFormularioRaw = localStorage.getItem('dados_formulario_abertura');
+        let dadosFormulario = {};
+
+        try {
+            dadosFormulario = dadosFormularioRaw ? JSON.parse(dadosFormularioRaw) : {};
+        } catch (error) {
+            dadosFormulario = {};
+        }
+
+        const empresa = (dadosFormulario.nome_empresa || 'Não informado').toString().trim() || 'Não informado';
+        const contato = (dadosFormulario.telefone || 'Não informado').toString().trim() || 'Não informado';
+        const dataPreenchimento = (dadosFormulario.data_preenchimento || 'Não informado').toString().trim() || 'Não informado';
+
+        const mensagemWhatsapp = `📥 Recebimento de formulário – Abertura de Empresa
+
+Empresa: ${empresa}
+Contato: ${contato}
+Data (de preenchimento do formulario): ${dataPreenchimento}
+
+Favor dar prosseguimento ao atendimento e análise das informações.`;
+
+        const linkWhatsapp = `https://wa.me/${numeroWhatsapp}?text=${encodeURIComponent(mensagemWhatsapp)}`;
+        const btnWhatsapp = document.getElementById('btn-whatsapp');
+        if (btnWhatsapp) {
+            btnWhatsapp.href = linkWhatsapp;
+        }
     </script>
 </body>
 

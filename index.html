@@ -201,19 +201,22 @@
         }
 
         input[type="text"],
+        input[type="tel"],
         input[type="email"],
+        input[type="date"],
         textarea,
         select {
             width: 100%;
-            padding: 14px 16px;
+            padding: 15px 16px;
             margin-top: 8px;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
+            border: 2px solid rgba(0, 178, 81, 0.2);
+            border-radius: 14px;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
-            background: #ffffff;
+            background: linear-gradient(180deg, #ffffff 0%, #fbfffb 100%);
             color: var(--text);
-            font-size: 0.95em;
+            font-size: 0.96em;
+            font-weight: 500;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
         }
@@ -248,7 +251,9 @@
         }
 
         input[type="text"]:focus,
+        input[type="tel"]:focus,
         input[type="email"]:focus,
+        input[type="date"]:focus,
         textarea:focus,
         select:focus {
             outline: none;
@@ -259,9 +264,23 @@
         }
 
         input[type="text"]::placeholder,
+        input[type="tel"]::placeholder,
         input[type="email"]::placeholder,
         textarea::placeholder {
             color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        input[type="date"] {
+            color: var(--text-secondary);
+            letter-spacing: 0.2px;
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 8px;
+            background: var(--primary-soft);
         }
 
         .radio-group,
@@ -430,25 +449,25 @@
         <fieldset>
             <legend>🏢 Dados da Empresa</legend>
             <label for="razao_social">Razão Social:</label>
-            <input type="text" id="razao_social" name="razao_social" required>
+            <input type="text" id="razao_social" name="razao_social" placeholder="Digite a razão social completa" required>
 
             <label for="nome_fantasia">Nome Fantasia:</label>
-            <input type="text" id="nome_fantasia" name="nome_fantasia" required>
+            <input type="text" id="nome_fantasia" name="nome_fantasia" placeholder="Digite o nome fantasia da empresa" required>
 
             <label for="endereco">Endereço:</label>
-            <input type="text" id="endereco" name="endereco" required>
+            <input type="text" id="endereco" name="endereco" placeholder="Rua, número e complemento" required>
 
             <label for="bairro">Bairro:</label>
-            <input type="text" id="bairro" name="bairro" required>
+            <input type="text" id="bairro" name="bairro" placeholder="Digite o bairro" required>
 
             <label for="iptu">IPTU Nº:</label>
-            <input type="text" id="iptu" name="iptu">
+            <input type="text" id="iptu" name="iptu" placeholder="Digite o número do IPTU">
 
             <label for="cep">CEP:</label>
-            <input type="text" id="cep" name="cep" required>
+            <input type="text" id="cep" name="cep" placeholder="Ex.: 70000-000" required>
 
             <label for="metragem">Metragem:</label>
-            <input type="text" id="metragem" name="metragem">
+            <input type="text" id="metragem" name="metragem" placeholder="Ex.: 120 m²">
 
             <label>Horário de Funcionamento:</label>
             <div style="margin-top: 8px;">
@@ -883,19 +902,19 @@
             </div>
 
             <label for="telefone_empresa">Telefone:</label>
-            <input type="tel" id="telefone_empresa" name="telefone_empresa" required>
+            <input type="tel" id="telefone_empresa" name="telefone_empresa" placeholder="Ex.: (61) 3710-0080" required>
 
             <label for="email_empresa">E-mail:</label>
-            <input type="email" id="email_empresa" name="email_empresa" required>
+            <input type="email" id="email_empresa" name="email_empresa" placeholder="Ex.: contato@empresa.com.br" required>
 
             <label for="capital_social">Capital Social:</label>
-            <input type="text" id="capital_social" name="capital_social" required>
+            <input type="text" id="capital_social" name="capital_social" placeholder="Ex.: R$ 50.000,00" required>
 
             <label for="objeto_social">Objeto Social (Atividades Econômicas Exercidas):</label>
             <textarea id="objeto_social" name="objeto_social" rows="3" required></textarea>
 
             <label for="cnae_primario">CNAE Primário:</label>
-            <input type="text" id="cnae_primario" name="cnae_primario" required>
+            <input type="text" id="cnae_primario" name="cnae_primario" placeholder="Ex.: 47.11-3-02" required>
 
             <label for="cnae_secundario">CNAE Secundário:</label>
             <textarea id="cnae_secundario" name="cnae_secundario" rows="4"
@@ -953,13 +972,13 @@
                     <legend>👤 Dados do Sócio ${numero}</legend>
                     
                     <label for="socio_nome_${numero}">Nome:</label>
-                    <input type="text" id="socio_nome_${numero}" name="socio_nome_${numero}" required>
+                    <input type="text" id="socio_nome_${numero}" name="socio_nome_${numero}" placeholder="Digite o nome completo do sócio" required>
 
                     <label for="socio_cpf_${numero}">CPF:</label>
-                    <input type="text" id="socio_cpf_${numero}" name="socio_cpf_${numero}" required>
+                    <input type="text" id="socio_cpf_${numero}" name="socio_cpf_${numero}" placeholder="Ex.: 000.000.000-00" required>
 
                     <label for="socio_rg_${numero}">RG:</label>
-                    <input type="text" id="socio_rg_${numero}" name="socio_rg_${numero}" required>
+                    <input type="text" id="socio_rg_${numero}" name="socio_rg_${numero}" placeholder="Digite o número do RG" required>
 
                     <label for="socio_data_expedicao_${numero}">Data de Expedição:</label>
                     <input type="date" id="socio_data_expedicao_${numero}" name="socio_data_expedicao_${numero}" required>
@@ -985,28 +1004,28 @@
                     </select>
 
                     <label for="profissao_${numero}">Profissão:</label>
-                    <input type="text" id="profissao_${numero}" name="profissao_${numero}" required>
+                    <input type="text" id="profissao_${numero}" name="profissao_${numero}" placeholder="Digite a profissão" required>
 
                     <label for="naturalidade_${numero}">Naturalidade:</label>
-                    <input type="text" id="naturalidade_${numero}" name="naturalidade_${numero}" required>
+                    <input type="text" id="naturalidade_${numero}" name="naturalidade_${numero}" placeholder="Cidade e estado de nascimento" required>
 
                     <label for="data_nascimento_${numero}">Data de Nascimento:</label>
                     <input type="date" id="data_nascimento_${numero}" name="data_nascimento_${numero}" required>
 
                     <label for="filiacao_${numero}">Filiação:</label>
-                    <input type="text" id="filiacao_${numero}" name="filiacao_${numero}" required>
+                    <input type="text" id="filiacao_${numero}" name="filiacao_${numero}" placeholder="Nome da mãe e do pai" required>
 
                     <label for="endereco_socio_${numero}">Endereço:</label>
-                    <input type="text" id="endereco_socio_${numero}" name="endereco_socio_${numero}" required>
+                    <input type="text" id="endereco_socio_${numero}" name="endereco_socio_${numero}" placeholder="Rua, número e complemento" required>
 
                     <label for="cep_socio_${numero}">CEP:</label>
-                    <input type="text" id="cep_socio_${numero}" name="cep_socio_${numero}" required>
+                    <input type="text" id="cep_socio_${numero}" name="cep_socio_${numero}" placeholder="Ex.: 70000-000" required>
 
                     <label for="email_socio_${numero}">E-mail:</label>
-                    <input type="email" id="email_socio_${numero}" name="email_socio_${numero}" required>
+                    <input type="email" id="email_socio_${numero}" name="email_socio_${numero}" placeholder="Ex.: socio@email.com" required>
 
                     <label for="telefone_socio_${numero}">Telefone:</label>
-                    <input type="tel" id="telefone_socio_${numero}" name="telefone_socio_${numero}" required>
+                    <input type="tel" id="telefone_socio_${numero}" name="telefone_socio_${numero}" placeholder="Ex.: (61) 99999-9999" required>
 
                     <label>Sócio Administrador:</label>
                     <div class="radio-group">
@@ -1015,7 +1034,7 @@
                     </div>
 
                     <label for="participacao_${numero}">Valor da Participação no Capital Social (%):</label>
-                    <input type="text" id="participacao_${numero}" name="participacao_${numero}" required>
+                    <input type="text" id="participacao_${numero}" name="participacao_${numero}" placeholder="Ex.: 50%" required>
 
                     <p style="margin-top: 20px; color: var(--text-secondary); font-size: 0.9em;"><strong>Obs:</strong> Enviar foto do RG ou CNH e CPF.</p>
                 </fieldset>
@@ -1460,13 +1479,24 @@
             formDataToSend.append('dataEnvio', dataEnvio);
 
             // URL do SheetMonkey
-            const scriptURL = 'https://api.sheetmonkey.io/form/ESzLegdYRAjQWCXXh1KVw';
+          const scriptURL = 'https://api.sheetmonkey.io/form/ESzLegdYRAjQWCXXh1KVw';
+
+            // teste const scriptURL = 'https://api.sheetmonkey.io/form/KCoSfM51NbYy99Z8sNoeh';
+
 
             fetch(scriptURL, {
                 method: 'POST',
                 body: formDataToSend
             })
                 .then(() => {
+                    const nomeEmpresaEnvio = (razao_social || nome_fantasia || 'Não informado').toString().trim() || 'Não informado';
+                    const telefoneEnvio = (telefone_empresa || 'Não informado').toString().trim() || 'Não informado';
+                    const dadosWhatsapp = {
+                        nome_empresa: nomeEmpresaEnvio,
+                        telefone: telefoneEnvio,
+                        data_preenchimento: dataEnvio
+                    };
+                    localStorage.setItem('dados_formulario_abertura', JSON.stringify(dadosWhatsapp));
                     window.location.href = 'ok.html';
                 })
                 .catch(error => {

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Exito Contabilidade</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body>
+    <div class="login-wrapper">
+        <div class="login-card">
+            <h1>Painel Administrativo</h1>
+            <p class="subtitle">Exito Contabilidade</p>
+
+            <form method="POST" action="/admin/login">
+                <label for="username">Usuário:</label>
+                <input type="text" id="username" name="username" required autofocus>
+
+                <label for="password">Senha:</label>
+                <input type="password" id="password" name="password" required>
+
+                <button type="submit">Entrar</button>
+            </form>
+
+            <% if (error) { %>
+                <div class="login-error"><%= error %></div>
+            <% } %>
+        </div>
+    </div>
+</body>
+
+</html>

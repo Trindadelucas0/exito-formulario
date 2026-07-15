@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <%- include('partials/head', { title: 'EXITO CONTABILIDADE - Alteração Contratual', css: 'form.css' }) %>
+</head>
+
+<body>
+    <%- include('partials/bg-animation') %>
+
+    <form id="form-briefing" class="form-briefing">
+        <h1 class="titulo-principal">Alteração Contratual</h1>
+
+        <p class="intro-text">Identifique a empresa, marque uma ou mais alterações desejadas e preencha os campos correspondentes a cada uma.</p>
+
+        <fieldset>
+            <legend>🏢 Identificação da Empresa</legend>
+            <label for="razao_social_atual">Razão Social da Empresa:</label>
+            <input type="text" id="razao_social_atual" name="razao_social_atual" placeholder="Digite a razão social atual" required>
+
+            <label for="cnpj_empresa">CNPJ da Empresa:</label>
+            <input type="text" id="cnpj_empresa" name="cnpj_empresa" placeholder="Ex.: 00.000.000/0000-00" required>
+
+            <label for="telefone_contato">Telefone para Contato:</label>
+            <input type="tel" id="telefone_contato" name="telefone_contato" placeholder="Ex.: (61) 99999-9999" required>
+
+            <label for="email_contato">E-mail para Contato:</label>
+            <input type="email" id="email_contato" name="email_contato" placeholder="Ex.: contato@empresa.com.br" required>
+        </fieldset>
+
+        <fieldset>
+            <legend>📝 Tipo de Alteração</legend>
+            <div class="checkbox-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="tipo_dados_cadastrais" name="tipo_alteracao" value="dados_cadastrais" data-bloco="bloco-dados-cadastrais">
+                    <label for="tipo_dados_cadastrais">Dados Cadastrais (nome fantasia, razão social, endereço, tipo de sociedade)</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="tipo_quadro_societario" name="tipo_alteracao" value="quadro_societario" data-bloco="bloco-quadro-societario">
+                    <label for="tipo_quadro_societario">Quadro Societário (entrada/saída de sócio, transferência de cotas)</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="tipo_retirada_atividades" name="tipo_alteracao" value="retirada_atividades" data-bloco="bloco-retirada-atividades">
+                    <label for="tipo_retirada_atividades">Retirada de Atividades da Empresa (CNAEs)</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="tipo_novas_atividades" name="tipo_alteracao" value="novas_atividades" data-bloco="bloco-novas-atividades">
+                    <label for="tipo_novas_atividades">Inclusão de Novas Atividades (CNAEs)</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="tipo_abertura_filial" name="tipo_alteracao" value="abertura_filial" data-bloco="bloco-abertura-filial">
+                    <label for="tipo_abertura_filial">Abertura de Filial</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="tipo_baixa_empresa" name="tipo_alteracao" value="baixa_empresa" data-bloco="bloco-baixa-empresa">
+                    <label for="tipo_baixa_empresa">Baixa de Empresa</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="tipo_outras_alteracoes" name="tipo_alteracao" value="outras_alteracoes" data-bloco="bloco-outras-alteracoes">
+                    <label for="tipo_outras_alteracoes">Outras Alterações</label>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset id="bloco-dados-cadastrais" class="bloco-condicional" style="display: none;">
+            <legend>🏢 Novos Dados Cadastrais</legend>
+            <label for="novo_nome_fantasia">Novo Nome Fantasia:</label>
+            <input type="text" id="novo_nome_fantasia" name="novo_nome_fantasia" placeholder="Digite o novo nome fantasia">
+
+            <label for="nova_razao_social">Nova Razão Social:</label>
+            <input type="text" id="nova_razao_social" name="nova_razao_social" placeholder="Digite a nova razão social">
+
+            <label for="novo_endereco">Novo Endereço:</label>
+            <input type="text" id="novo_endereco" name="novo_endereco" placeholder="Rua, número, complemento, bairro e CEP">
+
+            <label for="novo_tipo_sociedade">Novo Tipo de Sociedade:</label>
+            <select id="novo_tipo_sociedade" name="novo_tipo_sociedade">
+                <option value="">Selecione...</option>
+                <option value="ltda">LTDA (Sociedade Limitada)</option>
+                <option value="sa">S.A. (Sociedade Anônima)</option>
+                <option value="me">ME (Microempresa)</option>
+                <option value="epp">EPP (Empresa de Pequeno Porte)</option>
+                <option value="mei">MEI (Microempreendedor Individual)</option>
+                <option value="simples">Sociedade Simples</option>
+            </select>
+        </fieldset>
+
+        <fieldset id="bloco-quadro-societario" class="bloco-condicional" style="display: none;">
+            <legend>👥 Alteração do Quadro Societário</legend>
+            <label for="socio_a_retirar">Dados do Sócio a Ser Retirado:</label>
+            <textarea id="socio_a_retirar" name="socio_a_retirar" rows="3" placeholder="Nome completo e CPF do sócio que vai sair da sociedade"></textarea>
+
+            <label for="novo_socio_nome">Nome Completo do Novo Sócio:</label>
+            <input type="text" id="novo_socio_nome" name="novo_socio_nome" placeholder="Digite o nome completo do novo sócio, se houver">
+
+            <label for="transferencia_cotas">Detalhes da Transferência de Cotas/Participação:</label>
+            <textarea id="transferencia_cotas" name="transferencia_cotas" rows="3" placeholder="Como será a transferência das cotas entre os sócios (percentuais e valores)"></textarea>
+        </fieldset>
+
+        <fieldset id="bloco-retirada-atividades" class="bloco-condicional" style="display: none;">
+            <legend>➖ Retirada de Atividades</legend>
+            <label for="cnaes_retirar">CNAEs a Retirar:</label>
+            <textarea id="cnaes_retirar" name="cnaes_retirar" rows="4" placeholder="Digite um CNAE por linha"></textarea>
+        </fieldset>
+
+        <fieldset id="bloco-novas-atividades" class="bloco-condicional" style="display: none;">
+            <legend>➕ Inclusão de Novas Atividades</legend>
+            <label for="cnaes_incluir">Novos CNAEs a Incluir:</label>
+            <textarea id="cnaes_incluir" name="cnaes_incluir" rows="4" placeholder="Digite um CNAE por linha"></textarea>
+        </fieldset>
+
+        <fieldset id="bloco-abertura-filial" class="bloco-condicional" style="display: none;">
+            <legend>🏭 Abertura de Filial</legend>
+            <label for="dados_filial">Dados da Filial a Ser Aberta:</label>
+            <textarea id="dados_filial" name="dados_filial" rows="4" placeholder="Endereço, cidade, UF e CEP da nova filial"></textarea>
+        </fieldset>
+
+        <fieldset id="bloco-baixa-empresa" class="bloco-condicional" style="display: none;">
+            <legend>🛑 Baixa de Empresa</legend>
+            <label for="obs_baixa">Observações sobre a Baixa (opcional):</label>
+            <textarea id="obs_baixa" name="obs_baixa" rows="3" placeholder="Informações adicionais sobre o encerramento da empresa"></textarea>
+        </fieldset>
+
+        <fieldset id="bloco-outras-alteracoes" class="bloco-condicional" style="display: none;">
+            <legend>✏️ Outras Alterações</legend>
+            <label for="descricao_alteracao">Descreva a Alteração Desejada:</label>
+            <textarea id="descricao_alteracao" name="descricao_alteracao" rows="4" placeholder="Explique detalhadamente a alteração que deseja realizar"></textarea>
+        </fieldset>
+
+        <button type="submit" id="btn-enviar" class="btn-enviar">
+            <span>✨ Enviar Solicitação</span>
+        </button>
+    </form>
+
+    <script src="/js/form-alteracao.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <%- include('partials/head', { title: 'EXITO CONTABILIDADE', css: 'form.css' }) %>
+</head>
+
+<body>
+    <%- include('partials/bg-animation') %>
+
+    <form id="form-briefing" class="form-briefing">
+        <h1 class="titulo-principal">Ficha de Constituição de Empresa</h1>
+
+        <p class="intro-text">Preencha todos os campos com as informações da empresa e dos sócios.</p>
+
+        <fieldset>
+            <legend>🏢 Dados da Empresa</legend>
+            <label for="razao_social">Razão Social:</label>
+            <input type="text" id="razao_social" name="razao_social" placeholder="Digite a razão social completa" required>
+
+            <label for="nome_fantasia">Nome Fantasia:</label>
+            <input type="text" id="nome_fantasia" name="nome_fantasia" placeholder="Digite o nome fantasia da empresa" required>
+
+            <label for="endereco">Endereço:</label>
+            <input type="text" id="endereco" name="endereco" placeholder="Rua, número e complemento" required>
+
+            <label for="bairro">Bairro:</label>
+            <input type="text" id="bairro" name="bairro" placeholder="Digite o bairro" required>
+
+            <label for="iptu">IPTU Nº:</label>
+            <input type="text" id="iptu" name="iptu" placeholder="Digite o número do IPTU">
+
+            <label for="cep">CEP:</label>
+            <input type="text" id="cep" name="cep" placeholder="Ex.: 70000-000" required>
+
+            <label for="metragem">Metragem:</label>
+            <input type="text" id="metragem" name="metragem" placeholder="Ex.: 120 m²">
+
+            <label>Horário de Funcionamento:</label>
+            <div style="margin-top: 8px;">
+                <label style="margin-bottom: 15px; font-size: 0.9em; color: var(--text-secondary); display: block;">Selecione os dias da semana e defina os horários:</label>
+
+                <% const dias = [
+                    { valor: 'Segunda', chave: 'segunda', label: 'Segunda-feira' },
+                    { valor: 'Terça', chave: 'terca', label: 'Terça-feira' },
+                    { valor: 'Quarta', chave: 'quarta', label: 'Quarta-feira' },
+                    { valor: 'Quinta', chave: 'quinta', label: 'Quinta-feira' },
+                    { valor: 'Sexta', chave: 'sexta', label: 'Sexta-feira' },
+                    { valor: 'Sábado', chave: 'sabado', label: 'Sábado' },
+                    { valor: 'Domingo', chave: 'domingo', label: 'Domingo' }
+                ];
+                const horas = [];
+                for (let h = 0; h < 24; h++) horas.push(h.toString().padStart(2, '0') + ':00'); %>
+
+                <% dias.forEach(dia => { %>
+                <div class="horario-dia" style="display: flex; align-items: center; gap: 15px; margin-bottom: 12px; padding: 12px; border-radius: 8px; background: var(--primary-soft-light);">
+                    <div class="checkbox-item" style="min-width: 150px; margin: 0;">
+                        <input type="checkbox" id="dia_<%= dia.chave %>" name="dias_semana" value="<%= dia.valor %>" class="dia-checkbox">
+                        <label for="dia_<%= dia.chave %>" style="margin-top: 0;"><%= dia.label %></label>
+                    </div>
+                    <select name="horario_inicio_<%= dia.chave %>" class="horario-inicio" style="flex: 1;" disabled>
+                        <option value="">Horário início</option>
+                        <% horas.forEach(hora => { %><option><%= hora %></option><% }) %>
+                    </select>
+                    <select name="horario_fim_<%= dia.chave %>" class="horario-fim" style="flex: 1;" disabled>
+                        <option value="">Horário fim</option>
+                        <% horas.forEach(hora => { %><option><%= hora %></option><% }) %>
+                    </select>
+                </div>
+                <% }) %>
+            </div>
+
+            <label for="telefone_empresa">Telefone:</label>
+            <input type="tel" id="telefone_empresa" name="telefone_empresa" placeholder="Ex.: (61) 3710-0080" required>
+
+            <label for="email_empresa">E-mail:</label>
+            <input type="email" id="email_empresa" name="email_empresa" placeholder="Ex.: contato@empresa.com.br" required>
+
+            <label for="capital_social">Capital Social:</label>
+            <input type="text" id="capital_social" name="capital_social" placeholder="Ex.: R$ 50.000,00" required>
+
+            <label for="objeto_social">Objeto Social (Atividades Econômicas Exercidas):</label>
+            <textarea id="objeto_social" name="objeto_social" rows="3" required></textarea>
+
+            <label for="cnae_primario">CNAE Primário:</label>
+            <input type="text" id="cnae_primario" name="cnae_primario" placeholder="Ex.: 47.11-3-02" required>
+
+            <label for="cnae_secundario">CNAE Secundário:</label>
+            <textarea id="cnae_secundario" name="cnae_secundario" rows="4"
+                placeholder="Digite um ou mais CNAEs secundários (um por linha)"></textarea>
+
+            <label>Sociedade:</label>
+            <div class="radio-group">
+                <div class="radio-item"><input type="radio" name="sociedade" value="ltda"> LTDA (Sociedade Limitada)
+                </div>
+                <div class="radio-item"><input type="radio" name="sociedade" value="sa"> S.A. (Sociedade Anônima)</div>
+                <div class="radio-item"><input type="radio" name="sociedade" value="me"> ME (Microempresa)</div>
+                <div class="radio-item"><input type="radio" name="sociedade" value="epp"> EPP (Empresa de Pequeno Porte)
+                </div>
+                <div class="radio-item"><input type="radio" name="sociedade" value="mei"> MEI (Microempreendedor
+                    Individual)</div>
+                <div class="radio-item"><input type="radio" name="sociedade" value="simples"> Sociedade Simples</div>
+            </div>
+
+            <label for="nome_socio_receita">Nome do sócio perante a Receita:</label>
+            <input type="text" id="nome_socio_receita" name="nome_socio_receita"
+                placeholder="Digite o nome completo" pattern=".{3,}\s+.{2,}.*"
+                title="Informe nome e sobrenome (nome completo)." required>
+
+            <label>Quantidade de Sócios:</label>
+            <select name="quantidade_socios" id="quantidade_socios" required>
+                <option value="">Selecione...</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+
+            <label>Regime de Tributação:</label>
+            <div class="radio-group">
+                <div class="radio-item"><input type="radio" name="regime" value="lucro_presumido"> Lucro Presumido</div>
+                <div class="radio-item"><input type="radio" name="regime" value="simples_nacional"> Simples Nacional
+                </div>
+                <div class="radio-item"><input type="radio" name="regime" value="lucro_real"> Lucro Real</div>
+            </div>
+        </fieldset>
+
+        <div id="socios-container"></div>
+
+        <button type="submit" id="btn-enviar" class="btn-enviar">
+            <span>✨ Enviar Ficha</span>
+        </button>
+    </form>
+
+    <script src="/js/form-constituicao.js"></script>
+</body>
+
+</html>

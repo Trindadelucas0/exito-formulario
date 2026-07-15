@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Exito Contabilidade</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body>
+    <header class="admin-header">
+        <h1>Painel Administrativo - Exito Contabilidade</h1>
+        <form method="POST" action="/admin/logout">
+            <button type="submit" class="btn-logout">Sair</button>
+        </form>
+    </header>
+
+    <main class="admin-main">
+        <div class="tabs">
+            <button type="button" class="tab-btn active" data-tab="tab-constituicao">
+                Constituição de Empresa (<%= constituicao.length %>)
+            </button>
+            <button type="button" class="tab-btn" data-tab="tab-alteracao">
+                Alteração Contratual (<%= alteracao.length %>)
+            </button>
+        </div>
+
+        <section id="tab-constituicao" class="tab-panel active">
+            <%- include('partials/submission-list', {
+                submissions: constituicao,
+                emptyMessage: 'Nenhuma ficha de constituição de empresa recebida ainda.'
+            }) %>
+        </section>
+
+        <section id="tab-alteracao" class="tab-panel">
+            <%- include('partials/submission-list', {
+                submissions: alteracao,
+                emptyMessage: 'Nenhuma solicitação de alteração contratual recebida ainda.'
+            }) %>
+        </section>
+    </main>
+
+    <script src="/js/admin.js"></script>
+</body>
+
+</html>

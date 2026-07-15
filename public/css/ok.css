@@ -1,0 +1,403 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(10px, 3vw, 20px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+}
+
+.bg-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.bg-animation::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 178, 81, 0.08) 0%, transparent 70%);
+    animation: pulse 8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.8;
+    }
+}
+
+.grid-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(rgba(0, 178, 81, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 178, 81, 0.08) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: gridMove 20s linear infinite;
+    z-index: 0;
+    opacity: 0.6;
+}
+
+@keyframes gridMove {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(50px, 50px);
+    }
+}
+
+.particles {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    animation: float 15s infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh) translateX(0);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-100px) translateX(100px);
+        opacity: 0;
+    }
+}
+
+.container-obrigado {
+    background: #ffffff;
+    border: 2px solid rgba(0, 178, 81, 0.3);
+    padding: clamp(24px, 5vw, 60px) clamp(16px, 5vw, 50px);
+    border-radius: 30px;
+    box-shadow:
+        0 20px 60px rgba(0, 178, 81, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.8);
+    text-align: center;
+    max-width: min(600px, 96vw);
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    animation: slideUp 0.8s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.success-icon {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 30px;
+    position: relative;
+    animation: scaleIn 0.6s ease-out 0.3s both;
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.success-icon::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 4px solid #00B251;
+    border-radius: 50%;
+    animation: ripple 2s infinite;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+.checkmark {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #009642 0%, #00B251 50%, #00CC5A 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 10px 30px rgba(0, 178, 81, 0.3);
+}
+
+.checkmark i {
+    color: white;
+    font-size: 30px;
+    animation: checkmarkDraw 0.6s ease-out 0.5s both;
+}
+
+@keyframes checkmarkDraw {
+    from {
+        transform: scale(0) rotate(45deg);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+.container-obrigado h1 {
+    color: #009642;
+    font-size: clamp(1.7rem, 7vw, 3rem);
+    margin-bottom: 20px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    text-shadow: 0 2px 4px rgba(0, 178, 81, 0.1);
+}
+
+.container-obrigado p {
+    color: #2d4a2d;
+    font-size: clamp(0.96rem, 3.7vw, 1.2rem);
+    margin-bottom: 40px;
+    line-height: 1.8;
+    font-weight: 300;
+}
+
+.container-botoes {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.status-validacao {
+    margin-top: 18px;
+    padding: 14px 18px;
+    border-radius: 12px;
+    border: 2px solid rgba(0, 178, 81, 0.28);
+    background: linear-gradient(135deg, rgba(0, 178, 81, 0.1) 0%, rgba(0, 204, 90, 0.08) 100%);
+    color: #0b7a37;
+    font-size: 0.98em;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 28px;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: clamp(0.92rem, 3.8vw, 1rem);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: min(340px, 92vw);
+    justify-content: center;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn span {
+    position: relative;
+    z-index: 1;
+}
+
+.btn-voltar {
+    background: linear-gradient(135deg, #009642 0%, #00B251 50%, #00CC5A 100%);
+    color: white;
+    box-shadow: 0 10px 30px rgba(0, 178, 81, 0.3);
+}
+
+.btn-voltar:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(0, 178, 81, 0.4);
+}
+
+.btn-instagram {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: white;
+    box-shadow: 0 10px 30px rgba(188, 24, 136, 0.3);
+}
+
+.btn-instagram:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(188, 24, 136, 0.5);
+}
+
+.btn-whatsapp {
+    background: linear-gradient(135deg, #0a7f38 0%, #25d366 50%, #4af08b 100%);
+    color: white;
+    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.35);
+}
+
+.btn-whatsapp:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(37, 211, 102, 0.5);
+}
+
+.btn i {
+    font-size: 1.2em;
+}
+
+@media (max-width: 480px) {
+    .success-icon {
+        width: 86px;
+        height: 86px;
+        margin-bottom: 22px;
+    }
+
+    .checkmark {
+        width: 54px;
+        height: 54px;
+    }
+
+    .checkmark i {
+        font-size: 25px;
+    }
+
+    .container-botoes {
+        gap: 12px;
+        margin-top: 24px;
+    }
+
+    .status-validacao {
+        font-size: 0.9rem;
+        padding: 12px;
+    }
+}
+
+@media (min-width: 600px) {
+    .container-botoes {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .btn {
+        width: auto;
+    }
+
+    .container-obrigado {
+        padding: 70px 60px;
+    }
+}
+
+.tech-glow {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(0, 178, 81, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(40px);
+    animation: moveGlow 10s ease-in-out infinite;
+}
+
+.tech-glow:nth-child(1) {
+    top: -100px;
+    left: -100px;
+}
+
+.tech-glow:nth-child(2) {
+    bottom: -100px;
+    right: -100px;
+    animation-delay: -5s;
+}
+
+@keyframes moveGlow {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate(30px, 30px) scale(1.2);
+    }
+}

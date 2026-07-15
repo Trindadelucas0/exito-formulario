@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obrigado!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/ok.css">
+</head>
+
+<body>
+    <div class="bg-animation"></div>
+    <div class="grid-background"></div>
+    <div class="particles" id="particles"></div>
+
+    <div class="container-obrigado">
+        <div class="tech-glow"></div>
+        <div class="tech-glow"></div>
+
+        <div class="success-icon">
+            <div class="checkmark">
+                <i class="fas fa-check"></i>
+            </div>
+        </div>
+
+        <h1>Seu formulário foi enviado com sucesso!</h1>
+        <p id="texto-processo">
+            <% if (tipo === 'alteracao_contratual') { %>
+                Agora vamos dar continuidade ao processo de alteração contratual da sua empresa.<br>Em breve, falaremos com você!
+            <% } else { %>
+                Agora vamos dar continuidade ao processo de abertura da sua empresa.<br>Em breve, falaremos com você!
+            <% } %>
+        </p>
+        <div class="status-validacao">
+            Estamos validando o formulário e em instantes vamos abrir o WhatsApp automaticamente.
+            <br>Se não abrir, pode clicar aqui embaixo 👇
+        </div>
+
+        <div class="container-botoes">
+            <a href="https://www.instagram.com/exitoconbrasil" target="_blank" class="btn btn-instagram">
+                <i class="fab fa-instagram"></i>
+                <span>Seguir no Instagram</span>
+            </a>
+            <a id="btn-whatsapp" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">
+                <i class="fab fa-whatsapp"></i>
+                <span>Dar continuidade no WhatsApp</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 20;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        createParticles();
+
+        const numeroWhatsapp = '556137100080';
+        const tipoFormulario = <%- JSON.stringify(tipo) %>;
+        const empresa = <%- JSON.stringify(empresa) %>;
+        const contato = <%- JSON.stringify(telefone) %>;
+        const dataPreenchimento = <%- JSON.stringify(data) %>;
+        const isAlteracaoContratual = tipoFormulario === 'alteracao_contratual';
+
+        const tituloWhatsapp = isAlteracaoContratual
+            ? '📥 Recebimento de formulário – Alteração Contratual'
+            : '📥 Recebimento de formulário – Abertura de Empresa';
+
+        const mensagemWhatsapp = `${tituloWhatsapp}
+
+Empresa: ${empresa}
+Contato: ${contato}
+Data (de preenchimento do formulario): ${dataPreenchimento}
+
+Favor dar prosseguimento ao atendimento e análise das informações.`;
+
+        const linkWhatsapp = `https://wa.me/${numeroWhatsapp}?text=${encodeURIComponent(mensagemWhatsapp)}`;
+        const btnWhatsapp = document.getElementById('btn-whatsapp');
+        if (btnWhatsapp) {
+            btnWhatsapp.href = linkWhatsapp;
+        }
+
+        setTimeout(() => {
+            window.open(linkWhatsapp, '_blank');
+        }, 2000);
+    </script>
+</body>
+
+</html>

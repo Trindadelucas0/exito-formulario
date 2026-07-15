@@ -1,0 +1,42 @@
+<% if (!submissions || submissions.length === 0) { %>
+    <div class="empty-state"><%= emptyMessage %></div>
+<% } else { %>
+    <% submissions.forEach(function (submission) { %>
+        <div class="submission-card">
+            <div class="submission-summary" data-toggle-details>
+                <div class="submission-info">
+                    <strong><%= submission.resumo.nomeEmpresa %></strong>
+                    <span><%= submission.resumo.telefone %> · <%= submission.dataEnvio %></span>
+                </div>
+                <span class="submission-badge"><%= submission.totalPerguntas %> respostas</span>
+            </div>
+
+            <div class="submission-details">
+                <div class="submission-actions">
+                    <button type="button" class="btn-copiar" data-copy-text>📋 Copiar ficha completa</button>
+                    <button type="button" class="btn-copiar" data-copy-resumo
+                        data-empresa="<%= submission.resumo.nomeEmpresa %>"
+                        data-telefone="<%= submission.resumo.telefone %>"
+                        data-email="<%= submission.resumo.email %>"
+                        data-data="<%= submission.dataEnvio %>">📋 Copiar resumo</button>
+                </div>
+
+                <table class="qa-table">
+                    <tbody>
+                        <% submission.questionsAndAnswers.forEach(function (item) { %>
+                            <tr>
+                                <th><%= item.question %></th>
+                                <td><%= item.answer %></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+
+                <div class="raw-text-toggle">
+                    <button type="button" class="btn-copiar" data-toggle-raw>Ver texto numerado</button>
+                </div>
+                <textarea class="raw-text" data-raw-text readonly><%= submission.formattedText %></textarea>
+            </div>
+        </div>
+    <% }) %>
+<% } %>

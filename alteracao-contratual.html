@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXITO CONTABILIDADE - Alteração Contratual</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00B251;
+            --primary-light: #00CC5A;
+            --primary-dark: #009642;
+            --primary-soft: rgba(0, 178, 81, 0.15);
+            --primary-soft-light: rgba(0, 178, 81, 0.08);
+            --card-bg: #ffffff;
+            --text: #1a3a1a;
+            --text-secondary: #2d4a2d;
+            --border: rgba(0, 178, 81, 0.3);
+            --bg-light: #f7fef7;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #ffffff;
+            background-attachment: fixed;
+            color: var(--text);
+            padding: clamp(10px, 3vw, 20px);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animações de fundo */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 178, 81, 0.08) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 0.8;
+            }
+        }
+
+        .grid-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(0, 178, 81, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 178, 81, 0.08) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            z-index: 0;
+            opacity: 0.6;
+        }
+
+        @keyframes gridMove {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(50px, 50px);
+            }
+        }
+
+        .form-briefing {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border: 4px solid var(--border);
+            padding: clamp(20px, 4vw, 50px) clamp(14px, 4vw, 40px);
+            border-radius: 30px;
+            box-shadow:
+                0 20px 60px rgba(0, 178, 81, 0.15),
+                0 0 0 1px rgba(255, 255, 255, 0.8),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .titulo-principal {
+            text-align: center;
+            color: var(--primary-dark);
+            margin-bottom: 30px;
+            font-weight: 800;
+            font-size: clamp(1.55rem, 5.8vw, 2.5rem);
+            letter-spacing: -1px;
+        }
+
+        .intro-text {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            font-size: clamp(0.95rem, 3.8vw, 1.1rem);
+            line-height: 1.6;
+        }
+
+        fieldset {
+            border: 3px solid var(--border);
+            border-radius: 20px;
+            padding: clamp(14px, 3.2vw, 25px);
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #ffffff 0%, #f7fef7 100%);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        fieldset::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary) 0%, var(--primary-light) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        fieldset:hover {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+            box-shadow: 0 8px 24px rgba(0, 178, 81, 0.2);
+            transform: translateY(-2px);
+        }
+
+        fieldset:hover::before {
+            opacity: 1;
+        }
+
+        legend {
+            font-weight: 700;
+            padding: 0 15px;
+            color: var(--primary-dark);
+            font-size: 1.2em;
+            text-shadow: 0 2px 4px rgba(0, 178, 81, 0.1);
+            letter-spacing: 0.5px;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            font-weight: 500;
+            font-size: 0.95em;
+            color: var(--text);
+        }
+
+        label:first-child {
+            margin-top: 0;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="email"],
+        input[type="date"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 15px 16px;
+            margin-top: 8px;
+            border: 2px solid rgba(0, 178, 81, 0.2);
+            border-radius: 14px;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(180deg, #ffffff 0%, #fbfffb 100%);
+            color: var(--text);
+            font-size: 0.96em;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        select option {
+            padding: 12px;
+            font-weight: 500;
+        }
+
+        select option[value="Clean"] {
+            background-color: #f0f0f0 !important;
+            color: #333 !important;
+        }
+
+        select option[value="Moderno"] {
+            background-color: #e3f2fd !important;
+            color: #1976d2 !important;
+        }
+
+        select option[value="Sofisticado"] {
+            background-color: #f3e5f5 !important;
+            color: #7b1fa2 !important;
+        }
+
+        select option[value="Ainda não sei"] {
+            background-color: #fff3e0 !important;
+            color: #e65100 !important;
+        }
+
+        select option:hover {
+            opacity: 0.8;
+        }
+
+        input[type="text"]:focus,
+        input[type="tel"]:focus,
+        input[type="email"]:focus,
+        input[type="date"]:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: #ffffff;
+            box-shadow: 0 0 0 4px var(--primary-soft), 0 4px 12px rgba(0, 178, 81, 0.15);
+            transform: translateY(-1px);
+        }
+
+        input[type="text"]::placeholder,
+        input[type="tel"]::placeholder,
+        input[type="email"]::placeholder,
+        textarea::placeholder {
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        input[type="date"] {
+            color: var(--text-secondary);
+            letter-spacing: 0.2px;
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 8px;
+            background: var(--primary-soft);
+        }
+
+        .radio-group,
+        .checkbox-group {
+            margin-top: 10px;
+        }
+
+        .radio-item,
+        .checkbox-item {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .radio-item:hover,
+        .checkbox-item:hover {
+            background: var(--primary-soft);
+            border-radius: 8px;
+            transform: translateX(4px);
+        }
+
+        .radio-item input,
+        .checkbox-item input {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--primary);
+        }
+
+        .radio-item label,
+        .checkbox-item label {
+            margin-top: 0;
+            cursor: pointer;
+            font-weight: 400;
+        }
+
+        .btn-enviar {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
+            color: white;
+            border: none;
+            padding: 20px;
+            width: 100%;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow:
+                0 10px 30px rgba(0, 178, 81, 0.3),
+                0 4px 8px rgba(0, 163, 24, 0.2);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-enviar::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn-enviar:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-enviar:hover {
+            transform: translateY(-4px);
+            box-shadow:
+                0 20px 50px rgba(0, 178, 81, 0.4),
+                0 8px 16px rgba(0, 163, 24, 0.3);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+        }
+
+        .btn-enviar:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-enviar span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-vision-ads {
+            display: block;
+            margin: 0 auto 30px;
+            max-width: clamp(130px, 34vw, 200px);
+            background: white;
+            padding: clamp(10px, 3vw, 20px);
+            border-radius: 20px;
+            box-shadow:
+                0 10px 30px rgba(0, 178, 81, 0.25),
+                0 0 0 1px rgba(0, 178, 81, 0.1);
+            animation: logoFloat 3s ease-in-out infinite;
+            border: 2px solid var(--primary-soft);
+            transition: all 0.3s ease;
+        }
+
+        .logo-vision-ads:hover {
+            transform: scale(1.05);
+            box-shadow:
+                0 15px 40px rgba(0, 178, 81, 0.35),
+                0 0 0 1px var(--primary);
+        }
+
+        @keyframes logoFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        small {
+            color: var(--text-secondary);
+            font-size: 0.85em;
+        }
+
+        /* Scrollbar personalizada */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-dark);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
+        @media (max-width: 900px) {
+            .form-briefing {
+                border-width: 3px;
+                border-radius: 22px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            label {
+                font-size: 0.9rem;
+            }
+
+            input[type="text"],
+            input[type="tel"],
+            input[type="email"],
+            input[type="date"],
+            textarea,
+            select {
+                font-size: 16px;
+                border-radius: 12px;
+                padding: 14px;
+            }
+
+            .btn-enviar {
+                font-size: 1rem;
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-animation"></div>
+    <div class="grid-background"></div>
+
+    <form id="form-briefing" class="form-briefing">
+        <h1 class="titulo-principal">Qual Alteração Contratual Deseja Realizar?</h1>
+
+        <p class="intro-text">Identifique a empresa, marque uma ou mais alterações desejadas e preencha os campos correspondentes a cada uma.</p>
+
+        <fieldset>
+            <legend>🏢 Identificação da Empresa</legend>
+            <label for="razao_social_atual">Razão Social da Empresa:</label>
+            <input type="text" id="razao_social_atual" name="razao_social_atual" placeholder="Digite a razão social atual" required>
+
+            <label for="cnpj_empresa">CNPJ da Empresa:</label>
+            <input type="text" id="cnpj_empresa" name="cnpj_empresa" placeholder="Ex.: 00.000.000/0000-00" required>
+
+            <label for="telefone_contato">Telefone para Contato:</label>
+            <input type="tel" id="telefone_contato" name="telefone_contato" placeholder="Ex.: (61) 99999-9999" required>
+
+            <label for="email_contato">E-mail para Contato:</label>
+            <input type="email" id="email_contato" name="email_contato" placeholder="Ex.: contato@empresa.com.br" required>
+        </fieldset>
+
+        <fieldset>
+            <legend>📝 Tipo de Alteração</legend>
+            <div class="checkbox-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="tipo_dados_cadastrais" name="tipo_alteracao" value="dados_cadastrais" data-bloco="bloco-dados-cadastrais">
+                    <label for="tipo_dados_cadastrais">Dados Cadastrais (nome fantasia, razão social, endereço, tipo de sociedade)</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="tipo_quadro_societario" name="tipo_alteracao" value="quadro_societario" data-bloco="bloco-quadro-societario">
+                    <label for="tipo_quadro_societario">Quadro Societário (entrada/saída de sócio, transferência de cotas)</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="tipo_retirada_atividades" name="tipo_alteracao" value="retirada_atividades" data-bloco="bloco-retirada-atividades">
+                    <label for="tipo_retirada_atividades">Retirada de Atividades da Empresa (CNAEs)</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="tipo_novas_atividades" name="tipo_alteracao" value="novas_atividades" data-bloco="bloco-novas-atividades">
+                    <label for="tipo_novas_atividades">Inclusão de Novas Atividades (CNAEs)</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="tipo_abertura_filial" name="tipo_alteracao" value="abertura_filial" data-bloco="bloco-abertura-filial">
+                    <label for="tipo_abertura_filial">Abertura de Filial</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="tipo_baixa_empresa" name="tipo_alteracao" value="baixa_empresa" data-bloco="bloco-baixa-empresa">
+                    <label for="tipo_baixa_empresa">Baixa de Empresa</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="tipo_outras_alteracoes" name="tipo_alteracao" value="outras_alteracoes" data-bloco="bloco-outras-alteracoes">
+                    <label for="tipo_outras_alteracoes">Outras Alterações</label>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset id="bloco-dados-cadastrais" class="bloco-condicional" style="display: none;">
+            <legend>🏢 Novos Dados Cadastrais</legend>
+            <label for="novo_nome_fantasia">Novo Nome Fantasia:</label>
+            <input type="text" id="novo_nome_fantasia" name="novo_nome_fantasia" placeholder="Digite o novo nome fantasia">
+
+            <label for="nova_razao_social">Nova Razão Social:</label>
+            <input type="text" id="nova_razao_social" name="nova_razao_social" placeholder="Digite a nova razão social">
+
+            <label for="novo_endereco">Novo Endereço:</label>
+            <input type="text" id="novo_endereco" name="novo_endereco" placeholder="Rua, número, complemento, bairro e CEP">
+
+            <label for="novo_tipo_sociedade">Novo Tipo de Sociedade:</label>
+            <select id="novo_tipo_sociedade" name="novo_tipo_sociedade">
+                <option value="">Selecione...</option>
+                <option value="ltda">LTDA (Sociedade Limitada)</option>
+                <option value="sa">S.A. (Sociedade Anônima)</option>
+                <option value="me">ME (Microempresa)</option>
+                <option value="epp">EPP (Empresa de Pequeno Porte)</option>
+                <option value="mei">MEI (Microempreendedor Individual)</option>
+                <option value="simples">Sociedade Simples</option>
+            </select>
+        </fieldset>
+
+        <fieldset id="bloco-quadro-societario" class="bloco-condicional" style="display: none;">
+            <legend>👥 Alteração do Quadro Societário</legend>
+            <label for="socio_a_retirar">Dados do Sócio a Ser Retirado:</label>
+            <textarea id="socio_a_retirar" name="socio_a_retirar" rows="3" placeholder="Nome completo e CPF do sócio que vai sair da sociedade"></textarea>
+
+            <label for="novo_socio_nome">Nome Completo do Novo Sócio:</label>
+            <input type="text" id="novo_socio_nome" name="novo_socio_nome" placeholder="Digite o nome completo do novo sócio, se houver">
+
+            <label for="transferencia_cotas">Detalhes da Transferência de Cotas/Participação:</label>
+            <textarea id="transferencia_cotas" name="transferencia_cotas" rows="3" placeholder="Como será a transferência das cotas entre os sócios (percentuais e valores)"></textarea>
+        </fieldset>
+
+        <fieldset id="bloco-retirada-atividades" class="bloco-condicional" style="display: none;">
+            <legend>➖ Retirada de Atividades</legend>
+            <label for="cnaes_retirar">CNAEs a Retirar:</label>
+            <textarea id="cnaes_retirar" name="cnaes_retirar" rows="4" placeholder="Digite um CNAE por linha"></textarea>
+        </fieldset>
+
+        <fieldset id="bloco-novas-atividades" class="bloco-condicional" style="display: none;">
+            <legend>➕ Inclusão de Novas Atividades</legend>
+            <label for="cnaes_incluir">Novos CNAEs a Incluir:</label>
+            <textarea id="cnaes_incluir" name="cnaes_incluir" rows="4" placeholder="Digite um CNAE por linha"></textarea>
+        </fieldset>
+
+        <fieldset id="bloco-abertura-filial" class="bloco-condicional" style="display: none;">
+            <legend>🏭 Abertura de Filial</legend>
+            <label for="dados_filial">Dados da Filial a Ser Aberta:</label>
+            <textarea id="dados_filial" name="dados_filial" rows="4" placeholder="Endereço, cidade, UF e CEP da nova filial"></textarea>
+        </fieldset>
+
+        <fieldset id="bloco-baixa-empresa" class="bloco-condicional" style="display: none;">
+            <legend>🛑 Baixa de Empresa</legend>
+            <label for="obs_baixa">Observações sobre a Baixa (opcional):</label>
+            <textarea id="obs_baixa" name="obs_baixa" rows="3" placeholder="Informações adicionais sobre o encerramento da empresa"></textarea>
+        </fieldset>
+
+        <fieldset id="bloco-outras-alteracoes" class="bloco-condicional" style="display: none;">
+            <legend>✏️ Outras Alterações</legend>
+            <label for="descricao_alteracao">Descreva a Alteração Desejada:</label>
+            <textarea id="descricao_alteracao" name="descricao_alteracao" rows="4" placeholder="Explique detalhadamente a alteração que deseja realizar"></textarea>
+        </fieldset>
+
+        <button type="submit" id="btn-enviar" class="btn-enviar">
+            <span>✨ Enviar Solicitação</span>
+        </button>
+    </form>
+
+    <script>
+        // Campos obrigatórios de cada bloco condicional (exceto observações da baixa, que é opcional)
+        const camposObrigatoriosPorBloco = {
+            'bloco-dados-cadastrais': ['novo_nome_fantasia', 'nova_razao_social', 'novo_endereco', 'novo_tipo_sociedade'],
+            'bloco-quadro-societario': ['socio_a_retirar', 'novo_socio_nome', 'transferencia_cotas'],
+            'bloco-retirada-atividades': ['cnaes_retirar'],
+            'bloco-novas-atividades': ['cnaes_incluir'],
+            'bloco-abertura-filial': ['dados_filial'],
+            'bloco-baixa-empresa': [],
+            'bloco-outras-alteracoes': ['descricao_alteracao']
+        };
+
+        function alternarBlocoCondicional(checkbox) {
+            const blocoId = checkbox.dataset.bloco;
+            const bloco = document.getElementById(blocoId);
+            if (!bloco) return;
+
+            const camposObrigatorios = camposObrigatoriosPorBloco[blocoId] || [];
+
+            if (checkbox.checked) {
+                bloco.style.display = 'block';
+                camposObrigatorios.forEach(nomeCampo => {
+                    const campo = bloco.querySelector(`[name="${nomeCampo}"]`);
+                    if (campo) campo.required = true;
+                });
+            } else {
+                bloco.style.display = 'none';
+                bloco.querySelectorAll('input, textarea, select').forEach(campo => {
+                    campo.value = '';
+                    campo.required = false;
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Adiciona logo
+            const form = document.getElementById('form-briefing');
+            if (form && !form.querySelector('.logo-vision-ads')) {
+                const img = document.createElement('img');
+                img.src = './img/vision 3.png';
+                img.alt = 'Logo Vision Ads';
+                img.className = 'logo-vision-ads';
+                form.prepend(img);
+            }
+
+            // Exibe/oculta blocos condicionais conforme o tipo de alteração marcado
+            document.querySelectorAll('input[name="tipo_alteracao"]').forEach(checkbox => {
+                checkbox.addEventListener('change', function () {
+                    alternarBlocoCondicional(this);
+                });
+            });
+        });
+
+        // Script do formulário
+        document.getElementById('form-briefing').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const tiposMarcados = Array.from(document.querySelectorAll('input[name="tipo_alteracao"]:checked'));
+            if (tiposMarcados.length === 0) {
+                alert('⚠️ Selecione ao menos um tipo de alteração contratual.');
+                return;
+            }
+
+            const btn = document.getElementById('btn-enviar');
+            const btnSpan = btn.querySelector('span');
+            btn.disabled = true;
+            btnSpan.innerText = "ENVIANDO DADOS...";
+
+            const formData = new FormData(this);
+
+            // Captura os dados de identificação da empresa
+            const razao_social_atual = formData.get('razao_social_atual');
+            const cnpj_empresa = formData.get('cnpj_empresa');
+            const telefone_contato = formData.get('telefone_contato');
+            const email_contato = formData.get('email_contato');
+
+            // Cria array de perguntas e respostas
+            const questionsAndAnswers = [];
+            let questionNum = 1;
+
+            if (razao_social_atual) {
+                questionsAndAnswers.push({ number: questionNum++, question: 'Razão Social da Empresa', answer: razao_social_atual });
+            }
+            if (cnpj_empresa) {
+                questionsAndAnswers.push({ number: questionNum++, question: 'CNPJ da Empresa', answer: cnpj_empresa });
+            }
+            if (telefone_contato) {
+                questionsAndAnswers.push({ number: questionNum++, question: 'Telefone para Contato', answer: telefone_contato });
+            }
+            if (email_contato) {
+                questionsAndAnswers.push({ number: questionNum++, question: 'E-mail para Contato', answer: email_contato });
+            }
+
+            const tiposLabels = {
+                dados_cadastrais: 'Dados Cadastrais',
+                quadro_societario: 'Quadro Societário',
+                retirada_atividades: 'Retirada de Atividades da Empresa',
+                novas_atividades: 'Inclusão de Novas Atividades',
+                abertura_filial: 'Abertura de Filial',
+                baixa_empresa: 'Baixa de Empresa',
+                outras_alteracoes: 'Outras Alterações'
+            };
+            questionsAndAnswers.push({
+                number: questionNum++,
+                question: 'Tipo(s) de Alteração Solicitada(s)',
+                answer: tiposMarcados.map(cb => tiposLabels[cb.value] || cb.value).join(', ')
+            });
+
+            // Dados Cadastrais
+            const novo_nome_fantasia = formData.get('novo_nome_fantasia');
+            const nova_razao_social = formData.get('nova_razao_social');
+            const novo_endereco = formData.get('novo_endereco');
+            const novo_tipo_sociedade = formData.get('novo_tipo_sociedade');
+            const tipoSociedadeMap = {
+                ltda: 'LTDA (Sociedade Limitada)',
+                sa: 'S.A. (Sociedade Anônima)',
+                me: 'ME (Microempresa)',
+                epp: 'EPP (Empresa de Pequeno Porte)',
+                mei: 'MEI (Microempreendedor Individual)',
+                simples: 'Sociedade Simples'
+            };
+            if (novo_nome_fantasia) questionsAndAnswers.push({ number: questionNum++, question: 'Novo Nome Fantasia', answer: novo_nome_fantasia });
+            if (nova_razao_social) questionsAndAnswers.push({ number: questionNum++, question: 'Nova Razão Social', answer: nova_razao_social });
+            if (novo_endereco) questionsAndAnswers.push({ number: questionNum++, question: 'Novo Endereço', answer: novo_endereco });
+            if (novo_tipo_sociedade) questionsAndAnswers.push({ number: questionNum++, question: 'Novo Tipo de Sociedade', answer: tipoSociedadeMap[novo_tipo_sociedade] || novo_tipo_sociedade });
+
+            // Quadro Societário
+            const socio_a_retirar = formData.get('socio_a_retirar');
+            const novo_socio_nome = formData.get('novo_socio_nome');
+            const transferencia_cotas = formData.get('transferencia_cotas');
+            if (socio_a_retirar) questionsAndAnswers.push({ number: questionNum++, question: 'Dados do Sócio a Ser Retirado', answer: socio_a_retirar });
+            if (novo_socio_nome) questionsAndAnswers.push({ number: questionNum++, question: 'Nome Completo do Novo Sócio', answer: novo_socio_nome });
+            if (transferencia_cotas) questionsAndAnswers.push({ number: questionNum++, question: 'Detalhes da Transferência de Cotas/Participação', answer: transferencia_cotas });
+
+            // Retirada e inclusão de atividades
+            const cnaes_retirar = formData.get('cnaes_retirar');
+            const cnaes_incluir = formData.get('cnaes_incluir');
+            if (cnaes_retirar) questionsAndAnswers.push({ number: questionNum++, question: 'CNAEs a Retirar', answer: cnaes_retirar });
+            if (cnaes_incluir) questionsAndAnswers.push({ number: questionNum++, question: 'Novos CNAEs a Incluir', answer: cnaes_incluir });
+
+            // Abertura de filial
+            const dados_filial = formData.get('dados_filial');
+            if (dados_filial) questionsAndAnswers.push({ number: questionNum++, question: 'Dados da Filial a Ser Aberta', answer: dados_filial });
+
+            // Baixa de empresa
+            const obs_baixa = formData.get('obs_baixa');
+            if (obs_baixa) questionsAndAnswers.push({ number: questionNum++, question: 'Observações sobre a Baixa', answer: obs_baixa });
+
+            // Outras alterações
+            const descricao_alteracao = formData.get('descricao_alteracao');
+            if (descricao_alteracao) questionsAndAnswers.push({ number: questionNum++, question: 'Descrição da Alteração Desejada', answer: descricao_alteracao });
+
+            // Formatar texto de perguntas e respostas numeradas
+            const dataEnvio = new Date().toLocaleString('pt-BR');
+            let qaText = 'FICHA DE ALTERACAO CONTRATUAL\n';
+            qaText += `DATA DE ENVIO == ${dataEnvio}\n`;
+            qaText += `TOTAL DE PERGUNTAS == ${questionsAndAnswers.length}\n`;
+            qaText += '----------------------------------------\n';
+            questionsAndAnswers.forEach(item => {
+                const num = item.number.toString().padStart(3, '0');
+                const answerText = (item.answer || '')
+                    .toString()
+                    .replace(/\r?\n/g, ' | ')
+                    .replace(/\s+/g, ' ')
+                    .trim();
+                qaText += `${num}. ${item.question} == ${answerText}\n`;
+            });
+            qaText += '----------------------------------------\n';
+
+            // Cria FormData para SheetMonkey (formato numerado)
+            const formDataToSend = new FormData();
+            formDataToSend.append('perguntas_respostas_numeradas', qaText);
+            formDataToSend.append('total_perguntas', questionsAndAnswers.length.toString());
+            formDataToSend.append('dataEnvio', dataEnvio);
+
+            // URL do SheetMonkey (mesma planilha do formulário de constituição de empresa)
+            const scriptURL = 'https://api.sheetmonkey.io/form/2QaWd7xbG9qDC5C5wtCwh6';
+
+            fetch(scriptURL, {
+                method: 'POST',
+                body: formDataToSend
+            })
+                .then(() => {
+                    const nomeEmpresaEnvio = (razao_social_atual || 'Não informado').toString().trim() || 'Não informado';
+                    const telefoneEnvio = (telefone_contato || 'Não informado').toString().trim() || 'Não informado';
+                    const dadosWhatsapp = {
+                        tipo_formulario: 'alteracao_contratual',
+                        nome_empresa: nomeEmpresaEnvio,
+                        telefone: telefoneEnvio,
+                        data_preenchimento: dataEnvio
+                    };
+                    localStorage.setItem('dados_formulario_abertura', JSON.stringify(dadosWhatsapp));
+                    window.location.href = 'ok.html';
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    alert('❌ Ocorreu um erro ao enviar. Tente novamente.');
+                    btn.disabled = false;
+                    btnSpan.innerText = "✨ Enviar Solicitação";
+                });
+        });
+
+    </script>
+</body>
+
+</html>

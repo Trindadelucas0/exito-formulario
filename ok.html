@@ -433,7 +433,7 @@
         </div>
 
         <h1>Seu formulário foi enviado com sucesso!</h1>
-        <p>Agora vamos dar continuidade ao processo de abertura da sua empresa.
+        <p id="texto-processo">Agora vamos dar continuidade ao processo de abertura da sua empresa.
              <br>Em breve, falaremos com você!</p>
         <div class="status-validacao">
             Estamos validando o formulário e em instantes vamos abrir o WhatsApp automaticamente.
@@ -484,8 +484,19 @@
         const empresa = (dadosFormulario.nome_empresa || 'Não informado').toString().trim() || 'Não informado';
         const contato = (dadosFormulario.telefone || 'Não informado').toString().trim() || 'Não informado';
         const dataPreenchimento = (dadosFormulario.data_preenchimento || 'Não informado').toString().trim() || 'Não informado';
+        const tipoFormulario = (dadosFormulario.tipo_formulario || 'abertura_empresa').toString().trim();
+        const isAlteracaoContratual = tipoFormulario === 'alteracao_contratual';
 
-        const mensagemWhatsapp = `📥 Recebimento de formulário – Abertura de Empresa
+        const textoProcesso = document.getElementById('texto-processo');
+        if (textoProcesso && isAlteracaoContratual) {
+            textoProcesso.innerHTML = 'Agora vamos dar continuidade ao processo de alteração contratual da sua empresa.<br>Em breve, falaremos com você!';
+        }
+
+        const tituloWhatsapp = isAlteracaoContratual
+            ? '📥 Recebimento de formulário – Alteração Contratual'
+            : '📥 Recebimento de formulário – Abertura de Empresa';
+
+        const mensagemWhatsapp = `${tituloWhatsapp}
 
 Empresa: ${empresa}
 Contato: ${contato}

@@ -25,11 +25,11 @@ npm start
 
 Edite o `.env` e defina `ADMIN_USER`, `ADMIN_PASS` e `SESSION_SECRET` antes de subir em produção.
 
-Acesse (porta padrão `5050`, ajuste no `.env` se necessário):
+Acesse (porta padrão `5559`, ajuste no `.env` se necessário):
 
-- `http://localhost:5050/` — Ficha de Constituição de Empresa
-- `http://localhost:5050/alteracao-contratual` — Ficha de Alteração Contratual
-- `http://localhost:5050/admin/login` — Painel administrativo
+- `http://localhost:5559/` — Ficha de Constituição de Empresa
+- `http://localhost:5559/alteracao-contratual` — Ficha de Alteração Contratual
+- `http://localhost:5559/admin/login` — Painel administrativo
 
 ### Atenção às portas já usadas no servidor
 

@@ -9,9 +9,12 @@ function showLogin(req, res) {
 }
 
 function login(req, res) {
-  const { username, password } = req.body;
+  const username = String(req.body.username || '').trim();
+  const password = String(req.body.password || '').trim();
+  const expectedUser = String(process.env.ADMIN_USER || '').trim();
+  const expectedPass = String(process.env.ADMIN_PASS || '').replace(/\r/g, '').trim();
 
-  if (username === process.env.ADMIN_USER && password === process.env.ADMIN_PASS) {
+  if (username === expectedUser && password === expectedPass) {
     req.session.isAdmin = true;
     return res.redirect('/admin');
   }

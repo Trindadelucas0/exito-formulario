@@ -2,3 +2,20 @@ node_modules/
 .env
 data/*.json
 !data/.gitkeep
+
+# segredos/artefatos (vps-sync 2026-10-15)
+.env*
+!.env.example
+*.bak
+*.bak*
+*.pem
+*.key
+*.sql
+*.sql.gz
+*.dump
+node_modules/
+.next/
+.next.bak/
+__pycache__/
+*.pyc
+.npm/

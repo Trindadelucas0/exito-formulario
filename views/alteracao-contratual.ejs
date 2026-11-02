@@ -90,8 +90,17 @@
             <label for="socio_a_retirar">Dados do Sócio a Ser Retirado:</label>
             <textarea id="socio_a_retirar" name="socio_a_retirar" rows="3" placeholder="Nome completo e CPF do sócio que vai sair da sociedade"></textarea>
 
-            <label for="novo_socio_nome">Nome Completo do Novo Sócio:</label>
-            <input type="text" id="novo_socio_nome" name="novo_socio_nome" placeholder="Digite o nome completo do novo sócio, se houver">
+            <label for="quantidade_novos_socios">Quantidade de Novos Sócios:</label>
+            <select id="quantidade_novos_socios" name="quantidade_novos_socios">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+
+            <div id="novos-socios-container" aria-live="polite"></div>
 
             <label for="transferencia_cotas">Detalhes da Transferência de Cotas/Participação:</label>
             <textarea id="transferencia_cotas" name="transferencia_cotas" rows="3" placeholder="Como será a transferência das cotas entre os sócios (percentuais e valores)"></textarea>

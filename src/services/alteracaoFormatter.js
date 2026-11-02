@@ -32,6 +32,8 @@ function formatarAlteracao(body = {}, dataEnvio) {
     novo_tipo_sociedade,
     socio_a_retirar,
     novo_socio_nome,
+    quantidade_novos_socios,
+    novos_socios = [],
     transferencia_cotas,
     cnaes_retirar,
     cnaes_incluir,
@@ -65,9 +67,42 @@ function formatarAlteracao(body = {}, dataEnvio) {
     add('Novo Tipo de Sociedade', TIPO_SOCIEDADE_LABELS[novo_tipo_sociedade] || novo_tipo_sociedade);
   }
 
-  add('Dados do Sócio a Ser Retirado', socio_a_retirar);
-  add('Nome Completo do Novo Sócio', novo_socio_nome);
-  add('Detalhes da Transferência de Cotas/Participação', transferencia_cotas);
+  if (Array.isArray(tipos_alteracao) && tipos_alteracao.includes('quadro_societario')) {
+    add('Dados do Sócio a Ser Retirado', socio_a_retirar);
+    if (quantidade_novos_socios !== undefined && quantidade_novos_socios !== null) {
+      add('Quantidade de Novos Sócios', String(quantidade_novos_socios));
+    }
+
+    const novosSociosValidos = Array.isArray(novos_socios) ? novos_socios : [];
+    novosSociosValidos.forEach((socio, indice) => {
+      if (!socio || !socio.nome) return;
+      const numero = socio.numero || indice + 1;
+      add(`Novo Sócio ${numero} - Nome`, socio.nome);
+      add(`Novo Sócio ${numero} - CPF`, socio.cpf);
+      add(`Novo Sócio ${numero} - RG`, socio.rg);
+      add(`Novo Sócio ${numero} - Data de Expedição`, socio.data_expedicao);
+      add(`Novo Sócio ${numero} - Órgão Expedidor`, socio.orgao_expedidor);
+      add(`Novo Sócio ${numero} - Estado Civil`, socio.estado_civil);
+      add(`Novo Sócio ${numero} - Regime de Casamento`, socio.regime_casamento);
+      add(`Novo Sócio ${numero} - Profissão`, socio.profissao);
+      add(`Novo Sócio ${numero} - Naturalidade`, socio.naturalidade);
+      add(`Novo Sócio ${numero} - Data de Nascimento`, socio.data_nascimento);
+      add(`Novo Sócio ${numero} - Filiação`, socio.filiacao);
+      add(`Novo Sócio ${numero} - Endereço`, socio.endereco_socio);
+      add(`Novo Sócio ${numero} - CEP`, socio.cep_socio);
+      add(`Novo Sócio ${numero} - E-mail`, socio.email_socio);
+      add(`Novo Sócio ${numero} - Telefone`, socio.telefone_socio);
+      if (socio.administrador) {
+        add(`Novo Sócio ${numero} - Sócio Administrador`, socio.administrador === 'sim' ? 'Sim' : 'Não');
+      }
+      add(`Novo Sócio ${numero} - Valor da Participação no Capital Social (%)`, socio.participacao);
+    });
+
+    if (novosSociosValidos.length === 0) {
+      add('Nome Completo do Novo Sócio', novo_socio_nome);
+    }
+    add('Detalhes da Transferência de Cotas/Participação', transferencia_cotas);
+  }
 
   add('CNAEs a Retirar', cnaes_retirar);
   add('Novos CNAEs a Incluir', cnaes_incluir);

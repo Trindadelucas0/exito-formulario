@@ -1,11 +1,12 @@
 {
   "name": "exito-formulario",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Formularios da Exito Contabilidade (Constituicao de Empresa e Alteracao Contratual) com painel admin, usando Express, EJS e JSON como banco de dados.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node --watch server.js"
+    "dev": "node --watch server.js",
+    "test": "node --test"
   },
   "dependencies": {
     "dotenv": "^16.4.5",

@@ -183,6 +183,25 @@ label {
     color: var(--text);
 }
 
+.grupo-label {
+    display: block;
+    margin-top: 20px;
+    font-weight: 500;
+    font-size: 0.95em;
+    color: var(--text);
+}
+
+.novo-socio-formulario {
+    margin-top: 25px;
+    background: #ffffff;
+}
+
+.observacao-documentos {
+    margin-top: 20px;
+    color: var(--text-secondary);
+    font-size: 0.9em;
+}
+
 label:first-child {
     margin-top: 0;
 }

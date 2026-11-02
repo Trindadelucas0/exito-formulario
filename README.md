@@ -2,6 +2,8 @@
 
 Aplicação Express + EJS que substitui o SheetMonkey: os formulários de **Constituição de Empresa** e **Alteração Contratual** salvam as respostas em arquivos JSON (`data/constituicao.json` e `data/alteracao-contratual.json`), e um painel admin protegido por login permite consultar e copiar essas informações.
 
+A fonte oficial de comportamento, regras e guia de uso está em [`DOCUMENTACAO-SISTEMA.md`](DOCUMENTACAO-SISTEMA.md).
+
 ## Estrutura
 
 ```

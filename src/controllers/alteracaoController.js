@@ -2,6 +2,7 @@ const { v4: uuidv4 } = require('uuid');
 const path = require('path');
 const jsonStore = require('../services/jsonStore');
 const { formatarAlteracao } = require('../services/alteracaoFormatter');
+const { validarAlteracao } = require('../services/alteracaoValidator');
 
 const DATA_FILE = path.join(__dirname, '..', '..', 'data', 'alteracao-contratual.json');
 
@@ -10,9 +11,9 @@ function showForm(req, res) {
 }
 
 function submitForm(req, res) {
-  const tiposAlteracao = Array.isArray(req.body?.tipos_alteracao) ? req.body.tipos_alteracao : [];
-  if (tiposAlteracao.length === 0) {
-    return res.status(400).json({ ok: false, message: 'Selecione ao menos um tipo de alteração contratual.' });
+  const erroValidacao = validarAlteracao(req.body);
+  if (erroValidacao) {
+    return res.status(400).json({ ok: false, message: erroValidacao });
   }
 
   try {
